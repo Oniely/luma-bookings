@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Hero = () => {
 	return (
-		<section className="relative w-full h-dvh flex items-end padding-container py-6">
+		<section className="relative flex items-end w-full py-10 h-dvh padding-container">
 			<Image
 				src="/images/test-bg.jpg"
 				alt="bg"
@@ -12,7 +12,7 @@ const Hero = () => {
 			/>
 
 			<div className="relative z-50">
-				<p className="text-3xl mt-2 max-w-lg text-black">
+				<p className="max-w-xl mt-2 text-5xl font-canela-light text-white">
 					Dedicated to providing the best experience tailored to your
 					needs.
 				</p>

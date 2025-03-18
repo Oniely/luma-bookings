@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { Button } from "../ui/button";
 import Menu from "./Menu";
 import { Search } from "lucide-react";
+import Searchbar from "../Search/Searchbar";
 
 const Navbar = () => {
 	return (
@@ -9,10 +11,15 @@ const Navbar = () => {
 				<Button className="font-semibold">Book Now</Button>
 			</div>
 			<div className="absolute text-3xl transform -translate-x-1/2 font-canela-light left-1/2 flexCenter">
-				Luma
+				<Image
+					src="/images/logo-light.png"
+					alt="Luma"
+					width={200}
+					height={80}
+				/>
 			</div>
 			<div className="gap-3 flexCenter">
-				<Search className="mr-2" />
+				<Searchbar />
 				<Menu />
 			</div>
 		</div>
