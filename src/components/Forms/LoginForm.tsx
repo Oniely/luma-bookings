@@ -108,7 +108,7 @@ const LoginForm = () => {
 					{isPending ? <Loading /> : "Log in"}
 				</Button>
 				<p className="text-sm text-center">
-					Don't have an account?{" "}
+					Don&apos;t have an account?{" "}
 					<Link href="/register" className="underline">
 						Sign Up
 					</Link>

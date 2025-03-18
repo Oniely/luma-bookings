@@ -1,5 +1,3 @@
-import { Separator } from "@radix-ui/react-separator";
-import BookNow from "../Button/BookNow";
 import { Button } from "../ui/button";
 import Menu from "./Menu";
 import { Search } from "lucide-react";
