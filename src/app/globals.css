@@ -1,26 +1,87 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--background: #f8f8f8;
+	--foreground: #101010;
+	--primary: #21343e;
+	--secondary: #e9e9e9;
+	--beige: #dfd8cf;
+}
+
+@font-face {
+	font-family: "Canela";
+	src: url("/fonts/Canela-Regular.otf") format("opentype");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Canela-Light";
+	src: url("/fonts/Canela-Light.otf") format("opentype");
+	font-weight: normal;
+	font-style: normal;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
+	--color-beige: var(--beige);
+	--font-canela: "Canela", monospace;
+	--font-canela-light: "Canela-Light", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* 
+* For dark mode
+*/
+
+/* @media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+	}
+} */
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background: var(--background);
+	color: var(--foreground);
+	font-family: "Lato", sans-serif;
+}
+
+@layer utilities {
+	.max-container {
+		@apply mx-auto max-w-[1600px];
+	}
+
+	.padding-container {
+		@apply px-6 lg:px-12 2xl:px-0;
+	}
+
+	.flexCenter {
+		@apply flex items-center justify-center;
+	}
+
+	.flexBetween {
+		@apply flex items-center justify-between;
+	}
+
+	.flexStart {
+		@apply flex items-center justify-start;
+	}
+
+	.flexEnd {
+		@apply flex items-center justify-end;
+	}
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+	/* IE and Edge */
+	-ms-overflow-style: none;
+	/* Firefox */
+	scrollbar-width: none;
 }
