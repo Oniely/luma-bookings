@@ -4,6 +4,7 @@ import { Room } from "@/lib/types";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { Grip } from "lucide-react";
 
 const RoomGallery = ({ room }: { room: Room }) => {
 	const [showAllPhotos, setShowAllPhotos] = useState(false);
@@ -54,7 +55,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 
 	return (
 		<div className="relative">
-			<div className="mx-auto max-w-7xl rounded-2xl overflow-hidden h-[500px]">
+			<div className="mx-auto max-w-7xl rounded-2xl overflow-hidden h-[450px]">
 				<div className="grid w-full h-full grid-cols-1 gap-2 md:grid-cols-4">
 					<div className="md:col-span-2">
 						<div className="relative w-full h-full">
@@ -112,9 +113,10 @@ const RoomGallery = ({ room }: { room: Room }) => {
 					<Button
 						variant={"ghost"}
 						onClick={() => setShowAllPhotos(true)}
-						className="px-4 py-2 text-sm transition bg-white rounded-lg text-primary hover:bg-gray-700"
+						className="px-4 py-2 text-sm transition bg-white rounded-lg text-primary hover:bg-gray-700 hover:text-white"
 					>
-						Show all photos
+						<Grip />
+						<span>Show all photos</span>
 					</Button>
 				</div>
 			</div>

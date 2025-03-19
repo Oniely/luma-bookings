@@ -11,6 +11,7 @@
 :root {
 	--primary: #21343e;
 	--secondary: #6a6a6a;
+	--secondary-100: #dddddd;
 	--beige: #dfd8cf;
 	--black-100: #222222;
 	--radius: 0.625rem;
@@ -63,6 +64,7 @@
 	--color-foreground: var(--foreground);
 	--color-primary: var(--primary);
 	--color-secondary: var(--secondary);
+	--color-secondary-100: var(--secondary-100);
 	--color-beige: var(--beige);
 	--color-black-100: var(--black-100);
 	--font-poppins: var(--font-poppins), sans-serif;

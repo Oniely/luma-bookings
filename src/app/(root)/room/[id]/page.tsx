@@ -1,5 +1,8 @@
 import BookingWidget from "@/components/BookingWidget";
 import RoomGallery from "@/components/RoomGallery";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@radix-ui/react-dropdown-menu";
+import { Dot, Star } from "lucide-react";
 import Link from "next/link";
 
 const Page = () => {
@@ -22,10 +25,41 @@ const Page = () => {
 	};
 
 	return (
-		<div className="relative min-h-screen px-8 text-white page-space bg-primary padding-container max-container">
-			<div className="mt-4">
-				<h1 className="text-3xl mb-3">{room.title}</h1>
-				<RoomGallery room={room} />
+		<div className="relative min-h-screen px-8 text-white page-space bg-primary padding-container max-container pb-8">
+			<h1 className="text-3xl mb-3 mt-8">{room.title}</h1>
+			<RoomGallery room={room} />
+
+			<div className="grid grid-cols-3 mt-8">
+				<div className="max-w-2xl col-span-2 gap-6 flex flex-col">
+					<div>
+						<h1 className="text-xl">{room.title}</h1>
+						<div className="inline-flex">
+							<span>4 guests</span>
+							<Dot />
+							<span>1 bedroom</span>
+							<Dot />
+							<span>1 bed</span>
+							<Dot />
+							<span>1 bath</span>
+						</div>
+						<div className="flex items-center mt-2 leading-8">
+							<div className="flex items-center gap-2">
+								<Star
+									className="fill-white text-white stroke-1"
+									size={18}
+								/>
+								<span className="text-white">4.85</span>
+							</div>
+							<Dot />
+							<button className="text-white underline underline-offset-2">
+								69 reviews
+							</button>
+						</div>
+					</div>
+					<div className="w-full h-[1px] bg-secondary-100" />
+				</div>
+
+				<BookingWidget room={room} />
 			</div>
 		</div>
 	);
