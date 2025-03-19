@@ -26,6 +26,10 @@ export default function Home() {
 					<RoomCard room={room} />
 					<RoomCard room={{ ...room, guest_favorite: true }} />
 					<RoomCard room={room} />
+					<RoomCard room={{ ...room, guest_favorite: true }} />
+					<RoomCard room={room} />
+					<RoomCard room={{ ...room, guest_favorite: true }} />
+					<RoomCard room={room} />
 				</div>
 			</section>
 		</>

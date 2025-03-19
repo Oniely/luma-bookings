@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Menu from "./Menu";
-import { Search } from "lucide-react";
 import Searchbar from "../Search/Searchbar";
 import Link from "next/link";
 
@@ -13,7 +12,7 @@ const Navbar = () => {
 			</div>
 			<div className="absolute text-3xl transform -translate-x-1/2 font-canela-light left-1/2 flexCenter">
 				<Link href="/">
-					<div className="relative w-[14rem] h-[5rem]">
+					<div className="relative w-[12rem] h-[5rem]">
 						<Image
 							src="/images/logo-light.png"
 							alt="Luma"

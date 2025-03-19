@@ -1,11 +1,45 @@
 import { Menu as MenuIcon, UserRound } from "lucide-react";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import Link from "next/link";
 
 const Menu = () => {
 	return (
-		<nav className="flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2">
-			<MenuIcon size={22} />
-			<UserRound size={24} />
-		</nav>
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<nav className="flex items-center gap-2 rounded-full border border-gray-300 px-4 py-2">
+					<MenuIcon size={22} />
+					<UserRound size={24} />
+				</nav>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent className="w-56" align="end">
+				<DropdownMenuLabel>My Account</DropdownMenuLabel>
+				<DropdownMenuSeparator />
+				<DropdownMenuGroup>
+					<DropdownMenuItem asChild>
+						<Link href="/register">Sign up</Link>
+					</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link href="/login">Log in</Link>
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+				<DropdownMenuSeparator />
+				<DropdownMenuGroup>
+					<DropdownMenuItem>Profile</DropdownMenuItem>
+					<DropdownMenuItem>GitHub</DropdownMenuItem>
+					<DropdownMenuItem>Support</DropdownMenuItem>
+				</DropdownMenuGroup>
+				{/* <DropdownMenuSeparator />
+				<DropdownMenuItem>Log out</DropdownMenuItem> */}
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 };
 
