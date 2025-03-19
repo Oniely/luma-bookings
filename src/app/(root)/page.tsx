@@ -4,7 +4,7 @@ import CategoryCarousel from "@/components/Search/Category";
 import SearchWidget from "@/components/Search/SearchWidget";
 
 export default function Home() {
-	let room = {
+	const room = {
 		id: "1",
 		image: "/images/test-bg.jpg",
 		title: "Room",
@@ -21,7 +21,6 @@ export default function Home() {
 				<CategoryCarousel />
 			</section> */}
 			<section className="padding-container max-container h-dvh relative">
-				<SearchWidget />
 				<div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-4 py-8">
 					<RoomCard room={{ ...room, guest_favorite: true }} />
 					<RoomCard room={room} />

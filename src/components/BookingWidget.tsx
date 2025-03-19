@@ -5,10 +5,10 @@ import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 
 interface Props {
-	place?: any;
+	room?: any;
 }
 
-const BookingWidget = ({ place }: Props) => {
+const BookingWidget = ({ room }: Props) => {
 	const [checkIn, setCheckIn] = useState("");
 	const [checkOut, setCheckOut] = useState("");
 	const [numberOfGuests, setNumberOfGuests] = useState(1);
@@ -27,13 +27,13 @@ const BookingWidget = ({ place }: Props) => {
 		}
 
 		const data = {
-			place: place._id,
+			place: room.id,
 			checkIn,
 			checkOut,
 			numberOfGuests,
 			name,
 			phone,
-			price: numberOfDays * place.price,
+			price: numberOfDays * room.price,
 		};
 
 		try {
@@ -48,7 +48,7 @@ const BookingWidget = ({ place }: Props) => {
 	return (
 		<div className="rounded-2xl bg-white p-4 shadow">
 			<div className="text-center text-2xl tracking-tight">
-				Price: ${place.price} / per night
+				Price: ${room.price} / per night
 			</div>
 			<div className="mt-4 rounded-2xl border">
 				<div className="flex">
@@ -76,7 +76,9 @@ const BookingWidget = ({ place }: Props) => {
 					<input
 						id="guests"
 						value={numberOfGuests}
-						// onChange={(e) => setNumberOfGuests(e.target.value)}
+						onChange={(e) =>
+							setNumberOfGuests(Number(e.target.value))
+						}
 						type="number"
 					/>
 				</div>
@@ -101,9 +103,7 @@ const BookingWidget = ({ place }: Props) => {
 			</div>
 			<button onClick={bookThisPlace} className="primary mt-4">
 				Book this place
-				{numberOfDays > 0 && (
-					<span> ${numberOfDays * place.price}</span>
-				)}
+				{numberOfDays > 0 && <span> ${numberOfDays * room.price}</span>}
 			</button>
 		</div>
 	);

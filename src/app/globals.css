@@ -140,6 +140,10 @@
 	}
 }
 
+.page-space {
+	@apply pt-20;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
 	display: none;
 }

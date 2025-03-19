@@ -38,7 +38,7 @@ const SearchWidget = () => {
 	};
 
 	return (
-		<div className="flex items-center rounded-full overflow-hidden max-w-xl mx-auto bg-[#ebebeb] pl-5 text-md my-4 max-h-40">
+		<div className="flex items-center rounded-full overflow-hidden max-w-xl mx-auto bg-[#ebebeb] pl-5 text-md my-3 max-h-40">
 			<Popover>
 				<PopoverTrigger asChild className="flex">
 					<div className="flex items-center">
