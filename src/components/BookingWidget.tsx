@@ -1,110 +1,185 @@
 "use client";
 
+import { formatDate } from "@/lib/utils";
+import { ChevronDown, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import { differenceInCalendarDays } from "date-fns";
-import axios from "axios";
+import { Button } from "./ui/button";
+import { Calendar } from "./ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Separator } from "./ui/separator";
 
 interface Props {
-	place?: any;
+	room?: any;
 }
 
-const BookingWidget = ({ place }: Props) => {
-	const [checkIn, setCheckIn] = useState("");
-	const [checkOut, setCheckOut] = useState("");
-	const [numberOfGuests, setNumberOfGuests] = useState(1);
-	const [name, setName] = useState("");
-	const [phone, setPhone] = useState("");
-	const [redirect, setRedirect] = useState("");
+const BookingWidget = ({ room }: Props) => {
+	const [dateRange, setDateRange] = useState<any>({
+		from: null,
+		to: null,
+	});
 
-	let numberOfDays = 0;
-	if (checkIn && checkOut) {
-		numberOfDays = differenceInCalendarDays(checkOut, checkIn);
-	}
+	const [guests, setGuests] = useState({
+		adults: 0,
+		children: 0,
+	});
 
-	async function bookThisPlace() {
-		if (numberOfDays < 1 || numberOfGuests < 1 || !name || !phone) {
-			return alert("Provide all information before booking a place");
-		}
+	const totalGuests = guests.adults + guests.children;
 
-		const data = {
-			place: place._id,
-			checkIn,
-			checkOut,
-			numberOfGuests,
-			name,
-			phone,
-			price: numberOfDays * place.price,
-		};
-
-		try {
-			const { data: bookingData } = await axios.post("/booking", data);
-			const bookingId = bookingData._id;
-			setRedirect(`/account/bookings/${bookingId}`);
-		} catch (error) {
-			console.log(error);
-		}
-	}
+	const updateGuestCount = (
+		type: "adults" | "children",
+		increment: boolean
+	) => {
+		setGuests((prev) => ({
+			...prev,
+			[type]: increment ? prev[type] + 1 : Math.max(0, prev[type] - 1),
+		}));
+	};
 
 	return (
-		<div className="rounded-2xl bg-white p-4 shadow">
-			<div className="text-center text-2xl tracking-tight">
-				Price: ${place.price} / per night
+		<div className="w-full max-w-sm p-5 bg-white border border-secondary-100 rounded-2xl text-black-100 space-y-4">
+			<h3 className="text-base">
+				<span className="text-xl font-semibold">$14,560 </span>
+				night
+			</h3>
+			<div className="w-full border rounded-xl">
+				<Popover>
+					<PopoverTrigger asChild className="flex">
+						<div className="grid grid-cols-2 border-b">
+							<button className="flex flex-col items-start px-4 py-4 border-r">
+								<span className="text-xs font-medium tracking-tighter">
+									Check in
+								</span>
+								<span className="tracking-tight text-md">
+									{dateRange?.from
+										? formatDate(dateRange.from)
+										: "Add Dates"}
+								</span>
+							</button>
+
+							<button className="flex flex-col items-start px-4 py-4">
+								<span className="text-xs font-medium tracking-tighter">
+									Check out
+								</span>
+								<span className="tracking-tight text-md">
+									{dateRange?.to
+										? formatDate(dateRange.to)
+										: "Add Dates"}
+								</span>
+							</button>
+						</div>
+					</PopoverTrigger>
+					<PopoverContent className="w-auto p-0" align="start">
+						<Calendar
+							mode="range"
+							selected={dateRange}
+							onSelect={setDateRange}
+							numberOfMonths={2}
+							initialFocus
+							disabled={{ before: new Date() }}
+						/>
+					</PopoverContent>
+				</Popover>
+				<Popover>
+					<PopoverTrigger asChild>
+						<button className="flex items-center w-full p-5 justfiy-between">
+							<div className="flex flex-col items-start grow">
+								<p className="text-xs font-medium uppercase">
+									Guests
+								</p>
+								<span className="text-md">Add guests</span>
+							</div>
+							<ChevronsUpDown size={24} />
+						</button>
+					</PopoverTrigger>
+					<PopoverContent
+						className="w-auto p-0 rounded-4xl"
+						align="center"
+					>
+						<div className="flex flex-col p-7 w-[30rem] gap-6">
+							<div className="flexBetween">
+								<div className="flex flex-col items-start">
+									<span className="font-medium">Adults</span>
+									<span className="text-sm text-gray-500">
+										Ages 13 or above
+									</span>
+								</div>
+								<div className="gap-4 flexCenter">
+									<Button
+										onClick={() =>
+											updateGuestCount("adults", false)
+										}
+										variant={"ghost"}
+										size={"icon"}
+										className="rounded-full text-black-100 border-black-100 disabled:border-[#dddddd] border"
+										disabled={guests.adults === 0}
+									>
+										-
+									</Button>
+									<span>{guests.adults}</span>
+									<Button
+										onClick={() =>
+											updateGuestCount("adults", true)
+										}
+										variant={"ghost"}
+										size={"icon"}
+										className="border rounded-full text-black-100 border-black-100"
+									>
+										+
+									</Button>
+								</div>
+							</div>
+							<div className="flexBetween">
+								<div className="flex flex-col items-start">
+									<span className="font-medium">
+										Children
+									</span>
+									<span className="text-sm text-gray-500">
+										Ages 13 and below
+									</span>
+								</div>
+								<div className="gap-4 flexCenter">
+									<Button
+										onClick={() =>
+											updateGuestCount("children", false)
+										}
+										variant={"ghost"}
+										size={"icon"}
+										className="rounded-full text-black-100 border-black-100 disabled:border-[#dddddd] border"
+										disabled={guests.children === 0}
+									>
+										-
+									</Button>
+									<span>{guests.children}</span>
+									<Button
+										onClick={() =>
+											updateGuestCount("children", true)
+										}
+										variant={"ghost"}
+										size={"icon"}
+										className="border rounded-full text-black-100 border-black-100"
+									>
+										+
+									</Button>
+								</div>
+							</div>
+						</div>
+					</PopoverContent>
+				</Popover>
 			</div>
-			<div className="mt-4 rounded-2xl border">
-				<div className="flex">
-					<div className="grow px-4 py-3">
-						<label htmlFor="checkInDate">Check in:</label>
-						<input
-							id="checkInDate"
-							value={checkIn}
-							onChange={(e) => setCheckIn(e.target.value)}
-							type="date"
-						/>
-					</div>
-					<div className="grow border-l px-4 py-3">
-						<label htmlFor="checkOutDate">Check out:</label>
-						<input
-							id="checkOutDate"
-							value={checkOut}
-							onChange={(e) => setCheckOut(e.target.value)}
-							type="date"
-						/>
-					</div>
-				</div>
-				<div className="border-t px-4 py-3">
-					<label htmlFor="guests">Number of guests:</label>
-					<input
-						id="guests"
-						value={numberOfGuests}
-						// onChange={(e) => setNumberOfGuests(e.target.value)}
-						type="number"
-					/>
-				</div>
-				{checkIn && checkOut && numberOfGuests && (
-					<div className="border-t px-4 py-3">
-						<label htmlFor="name">Your full name:</label>
-						<input
-							id="name"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							type="text"
-						/>
-						<label htmlFor="phone">Phone number:</label>
-						<input
-							id="phone"
-							value={phone}
-							onChange={(e) => setPhone(e.target.value)}
-							type="tel"
-						/>
-					</div>
-				)}
+			<Button className="w-full py-7 text-lg" size={"lg"}>
+				Reserve
+			</Button>
+			<p className="text-sm text-center">*You&apos;t be charged yet.</p>
+			<div className="flexBetween">
+				<p className="underline">$14,560 x 5 nights</p>
+				<p>$72,800</p>
 			</div>
-			<button onClick={bookThisPlace} className="primary mt-4">
-				Book this place
-				{numberOfDays > 0 && (
-					<span> ${numberOfDays * place.price}</span>
-				)}
-			</button>
+			<Separator color="#dddddd" />
+			{/* separator */}
+			<div className="flexBetween font-semibold text-lg">
+				<p>Total</p>
+				<p>$72,800</p>
+			</div>
 		</div>
 	);
 };
