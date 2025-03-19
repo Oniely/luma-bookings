@@ -169,7 +169,7 @@ const BookingWidget = ({ room }: Props) => {
 			<Button className="w-full py-7 text-lg" size={"lg"}>
 				Reserve
 			</Button>
-			<p className="text-sm text-center">*You won't be charged yet.</p>
+			<p className="text-sm text-center">*You&apos;t be charged yet.</p>
 			<div className="flexBetween">
 				<p className="underline">$14,560 x 5 nights</p>
 				<p>$72,800</p>
