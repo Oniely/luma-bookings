@@ -1,3 +1,4 @@
+
 import RoomCard from "@/components/Cards/RoomCard";
 import Hero from "@/components/Home/Hero";
 import { rooms } from "@/lib/mock_data";
@@ -16,6 +17,7 @@ export default function Home() {
 					))}
 				</div>
 			</section>
+			
 		</>
 	);
 }

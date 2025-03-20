@@ -1,20 +1,19 @@
-"use client";
-
+import React from "react";
 import { formatDate } from "@/lib/utils";
-import { ChevronDown, ChevronsUpDown } from "lucide-react";
-import { useState } from "react";
-import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import Link from "next/link";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { useState } from "react";
+import { ChevronDown, ChevronsUpDown } from "lucide-react";
 
 interface Props {
 	room?: any;
 }
 
-const BookingWidget = ({ room }: Props) => {
-	const [dateRange, setDateRange] = useState<any>({
+const BookingInformation: React.FC = () => {
+
+  const [dateRange, setDateRange] = useState<any>({
 		from: null,
 		to: null,
 	});
@@ -37,7 +36,7 @@ const BookingWidget = ({ room }: Props) => {
 	};
 
 	return (
-		<div className="w-full max-w-sm p-5 bg-white border border-secondary-100 rounded-2xl text-black-100 space-y-4 h-auto max-h-full sticky top-4">
+		<div className="w-full p-5 bg-white border border-secondary-100 rounded-2xl text-black-100 space-y-4 h-auto max-h-full sticky top-4 shadow-lg">
 			<h3 className="text-base">
 				<span className="text-xl font-semibold">$14,560 </span>
 				night
@@ -174,13 +173,6 @@ const BookingWidget = ({ room }: Props) => {
 				</Popover>
 			</div>
 
-			<Link href="/booking-confirmation">
-			<Button className="w-full py-7 text-lg" size={"lg"}>
-				Reserve
-			</Button>
-			</Link>
-
-			<p className="text-sm text-center">*You&apos;t be charged yet.</p>
 			<div className="flexBetween">
 				<p className="underline">$14,560 x 5 nights</p>
 				<p>$72,800</p>
@@ -191,8 +183,14 @@ const BookingWidget = ({ room }: Props) => {
 				<p>Total</p>
 				<p>$72,800</p>
 			</div>
+
+      <div className="w-full">
+        <button className="mt-4 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-600 w-full">
+            Confirm Booking
+        </button>
+      </div>
 		</div>
 	);
 };
 
-export default BookingWidget;
+export default BookingInformation;
