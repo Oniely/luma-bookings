@@ -1,3 +1,5 @@
+import { PerkName } from "@/components/Room/Perks";
+
 export interface Room {
 	id: string;
 	title: string;
@@ -5,6 +7,8 @@ export interface Room {
 	photos: string[];
 	price: number;
 	maxGuest: number;
-	checkIn: string;
-	checkOut: string;
+	dateAvailableStart?: Date;
+	dateAvailableEnd?: Date;
+	guestFavorite?: boolean;
+	perks?: PerkName[];
 }

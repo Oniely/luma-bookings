@@ -1,18 +1,10 @@
+import { Room } from "@/lib/types";
 import { formatAvailableDate } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Link from "next/link";
 
 interface Props {
-	room: {
-		id: string;
-		image: string;
-		title: string;
-		description: string;
-		data_available_start: Date;
-		data_available_end: Date;
-		price: number;
-		guest_favorite?: boolean;
-	};
+	room: Room;
 }
 
 const RoomCard = ({ room }: Props) => {
@@ -22,7 +14,7 @@ const RoomCard = ({ room }: Props) => {
 				<div className="flex rounded-2xl">
 					<img
 						className="aspect-square rounded-2xl object-cover object-center"
-						src={room.image}
+						src={room.photos[0]}
 						alt="photo"
 					/>
 				</div>
@@ -44,8 +36,8 @@ const RoomCard = ({ room }: Props) => {
 					</h3>
 					<h3 className="truncate text-secondary leading-none mt-1">
 						{formatAvailableDate(
-							room.data_available_start,
-							room.data_available_end
+							room.dateAvailableStart!,
+							room.dateAvailableEnd!
 						)}
 					</h3>
 					<div className="mt-1.5 text-black-100">
@@ -53,7 +45,7 @@ const RoomCard = ({ room }: Props) => {
 					</div>
 				</div>
 
-				{room.guest_favorite && (
+				{room.guestFavorite && (
 					<p className="bg-white text-black-100 py-1 px-2 absolute top-3 left-3 rounded-full text-sm font-medium">
 						Guest favorite
 					</p>

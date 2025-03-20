@@ -3,33 +3,24 @@ import Perks from "@/components/Room/Perks";
 import RoomDescription from "@/components/Room/RoomDescription";
 import RoomGallery from "@/components/Room/RoomGallery";
 import { Separator } from "@/components/ui/separator";
+import { rooms } from "@/lib/mock_data";
+import { Room } from "@/lib/types";
 import { Dot, Star } from "lucide-react";
+import { notFound } from "next/navigation";
 
-const Page = () => {
-	const room = {
-		id: "1",
-		title: "Cabin 2-Modern Cabin w/Tempur bed & stunning view",
-		description:
-			"This modern studio unit is 22 sqm , it the perfect place for you to stay in Cebu City with your friends and family. Horizon 101, the highest building in Cebu, is located at 74 General Maxilom Ave in Cebu City. The building itself is just a walking distance to Fuente Osmeña Circle, Cristo Inglesia Church, Restaurants, Shopping malls, Hospitals, and Banks. Public transport is highly available as jeeps, and taxis are all around the city, and is located in the lobby of this building. The space The unit has a full sized bed with a pull-out bed for extra person. It has wifi, air-conditioning, water heater shower, HD LED TV and ready to Netflix but your acct and youtube,mini refrigerator means it is a kind of refrigerator that only cool down a beverage like water and coke but will not become cooled fast,microwave, induction cooker, electric kettle, rice cooker, and complete kitchen utensils and also complete with towels and bathroom accessories. Check in/out.please note that check in are after 1400hrs but maybe earlier based on the availability.check out is strictly at 1200 hrs or earier. There are security officers on duty 24/7 at the horizon 101 property.and also has pay parking space just inquire on us.Guest accessSwimming Pool Notice:pool is available 8am to 8pm.swimming pool will be closed every Tuesday due to cleaning.extra towel charge - Php 75 per towelOther things to noteRequirements for guests checking in must be sent to us before the check in date to have a smooth check in.- Valid Id- Vaccine Card/ Vaccine CertificateRequirements for visitors- Valid Id- Vaccine Card/ Vaccine Certificatefor early check in we charge php100 per hour and it depends on the availability in our bookings payment is through Gcash. we charge late check outs php100 per hourfor check in 2pm we have a staff that will assist you upon check in, if you are planning to chk in late no worries we will just leave the check in form, key and key card in the mailboxwe can only accept alternations that has been informed to us 1 week(7 days) before the check idate. thank you",
-		checkIn: "3:00 PM",
-		checkOut: "11:00 AM",
-		maxGuest: 2,
-		price: 100,
-		photos: [
-			"https://a0.muscache.com/im/pictures/ffb001b7-92a3-413f-ae51-e5b2c1df5580.jpg?im_w=1200",
-			"https://a0.muscache.com/im/pictures/6f4f3124-e7fc-4484-89fd-561d87cb0ec1.jpg?im_w=720",
-			"https://a0.muscache.com/im/pictures/0f87c895-6bd8-4424-b069-bc38464cd5f3.jpg?im_w=720",
-			"https://a0.muscache.com/im/pictures/0852a549-7c05-43c8-86b7-852b6867f009.jpg?im_w=1200",
-			"https://a0.muscache.com/im/pictures/ff22eba0-5a97-4b1e-b7a2-ea2781ebaeae.jpg?im_w=720",
-		],
-	};
+const Page = ({ params }: { params: { id: string } }) => {
+	const id = params.id;
+
+	const room = rooms.find((room) => room.id === id);
+
+	if (!room) notFound();
 
 	return (
-		<div className="relative min-h-screen px-8 text-white page-space bg-primary padding-container max-container pb-8">
-			<h1 className="text-3xl mb-3 mt-8">{room.title}</h1>
+		<div className="relative min-h-screen px-8 pb-8 text-white page-space bg-primary padding-container max-container">
+			<h1 className="mt-8 mb-3 text-3xl">{room.title}</h1>
 			<RoomGallery room={room} />
 			<div className="grid grid-cols-3 mt-8">
-				<div className="max-w-xl lg:max-w-2xl col-span-2 gap-6 flex flex-col">
+				<div className="flex flex-col max-w-xl col-span-2 gap-6 lg:max-w-2xl">
 					<div>
 						<h1 className="text-xl">{room.title}</h1>
 						<div className="inline-flex">
@@ -41,19 +32,53 @@ const Page = () => {
 							<Dot />
 							<span>1 bath</span>
 						</div>
-						<div className="flex items-center mt-2 leading-8">
-							<div className="flex items-center gap-2">
-								<Star
-									className="fill-white text-white stroke-1"
-									size={18}
-								/>
-								<span className="text-white">4.85</span>
+						{room.guestFavorite ? (
+							<div className="border rounded-xl border-white flex items-center justify-around my-8 p-5 h-[6rem]">
+								<div className="gap-5 leading-none flexCenter">
+									<p className="text-lg font-medium text-center">
+										Guest <br /> favorite
+									</p>
+									<p className="text-sm hidden lg:block">
+										One of the most loved rooms <br /> on
+										Luma, according to guests
+									</p>
+								</div>
+								<div className="block h-full lg:hidden">
+									<Separator orientation="vertical" />
+								</div>
+								<div className="flex-col leading-none flexCenter">
+									<p className="font-medium">4.84</p>
+									<div className="flex">
+										{[...Array(5)].map((_, i) => (
+											<Star
+												className=""
+												size={12}
+												key={i}
+											/>
+										))}
+									</div>
+								</div>
+								<Separator orientation="vertical" />
+								<div className="flex-col leading-none flexCenter">
+									<p className="font-medium">200</p>
+									<p className="text-sm underline">reviews</p>
+								</div>
 							</div>
-							<Dot />
-							<button className="text-white underline underline-offset-2">
-								69 reviews
-							</button>
-						</div>
+						) : (
+							<div className="flex items-center mt-2 leading-8">
+								<div className="flex items-center gap-2">
+									<Star
+										className="text-white stroke-1 fill-white"
+										size={18}
+									/>
+									<span className="text-white">4.85</span>
+								</div>
+								<Dot />
+								<button className="text-white underline underline-offset-2">
+									69 reviews
+								</button>
+							</div>
+						)}
 					</div>
 					<Separator />
 					<div>
@@ -93,13 +118,13 @@ const Page = () => {
 				<div className="flex items-center mt-2 leading-8">
 					<div className="flex items-center gap-2">
 						<Star
-							className="fill-white text-white stroke-1"
+							className="text-white stroke-1 fill-white"
 							size={28}
 						/>
-						<span className="text-white text-lg">4.85</span>
+						<span className="text-lg text-white">4.85</span>
 					</div>
 					<Dot />
-					<button className="text-white underline-offset-2 text-lg">
+					<button className="text-lg text-white underline-offset-2">
 						69 reviews
 					</button>
 				</div>

@@ -94,7 +94,7 @@ const Perks = ({
 	const displayPerks = perks.slice(0, maxDisplay);
 
 	return (
-		<div className={`grid grid-cols-2 gap-2 ${className}`}>
+		<div className={`grid grid-cols-2 gap-1 ${className}`}>
 			{displayPerks.map((perkName, index) => (
 				<PerkItem key={index} perkName={perkName} />
 			))}
