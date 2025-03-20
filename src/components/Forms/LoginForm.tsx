@@ -1,13 +1,13 @@
 "use client";
 
-import { login } from "@/lib/action/auth";
+import { login, loginWithCredential, loginWithGithub } from "@/lib/action/auth";
 import { loginSchema } from "@/lib/schema/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
 import Loading from "../Loading";
 import { Button } from "../ui/button";
-import { SquareAsterisk } from "lucide-react";
+import { Github, SquareAsterisk } from "lucide-react";
 
 const LoginForm = () => {
 	const [formValues, setFormValues] = useState({
@@ -38,7 +38,10 @@ const LoginForm = () => {
 			return;
 		}
 
-		const res = await login(result.data);
+		const res = await loginWithCredential(
+			result.data.email,
+			result.data.password
+		);
 
 		if (res?.error) {
 			setErrors({ email: res.error });
@@ -113,6 +116,16 @@ const LoginForm = () => {
 						Sign Up
 					</Link>
 				</p>
+				<span className="my-3 text-sm text-center">or</span>
+				<Button
+					type="button"
+					onClick={() => loginWithGithub()}
+					variant={"outline"}
+					className="py-6 rounded-none"
+				>
+					<Github />
+					Login with Github
+				</Button>
 			</form>
 		</div>
 	);

@@ -9,8 +9,13 @@ import {
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import Link from "next/link";
+import { auth } from "@/app/auth";
+import { Button } from "../ui/button";
+import { logout } from "@/lib/action/auth";
 
-const Menu = () => {
+const Menu = async () => {
+	const session = await auth();
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -22,22 +27,34 @@ const Menu = () => {
 			<DropdownMenuContent className="w-56" align="end">
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuGroup>
-					<DropdownMenuItem asChild>
-						<Link href="/register">Sign up</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem asChild>
-						<Link href="/login">Log in</Link>
-					</DropdownMenuItem>
-				</DropdownMenuGroup>
-				<DropdownMenuSeparator />
+				{session?.user ? null : (
+					<>
+						<DropdownMenuGroup>
+							<DropdownMenuItem asChild>
+								<Link href="/register">Sign up</Link>
+							</DropdownMenuItem>
+							<DropdownMenuItem asChild>
+								<Link href="/login">Log in</Link>
+							</DropdownMenuItem>
+						</DropdownMenuGroup>
+						<DropdownMenuSeparator />
+					</>
+				)}
 				<DropdownMenuGroup>
 					<DropdownMenuItem>Profile</DropdownMenuItem>
 					<DropdownMenuItem>GitHub</DropdownMenuItem>
 					<DropdownMenuItem>Support</DropdownMenuItem>
 				</DropdownMenuGroup>
-				{/* <DropdownMenuSeparator />
-				<DropdownMenuItem>Log out</DropdownMenuItem> */}
+				{session?.user && (
+					<>
+						<DropdownMenuSeparator />
+						<DropdownMenuItem asChild>
+							<button onClick={logout} className="w-full">
+								Log out
+							</button>
+						</DropdownMenuItem>
+					</>
+				)}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

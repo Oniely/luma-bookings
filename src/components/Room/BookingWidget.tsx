@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDate } from "@/lib/utils";
-import { ChevronDown, ChevronsUpDown } from "lucide-react";
+import { ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";

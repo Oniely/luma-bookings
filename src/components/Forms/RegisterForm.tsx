@@ -1,16 +1,18 @@
 "use client";
 
-import { register } from "@/lib/action/auth";
+import { loginWithGithub, register } from "@/lib/action/auth";
 import { registerSchema } from "@/lib/schema/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
 import Loading from "../Loading";
 import { Button } from "../ui/button";
-import { SquareAsterisk } from "lucide-react";
+import { Github, SquareAsterisk } from "lucide-react";
 
 const RegisterForm = () => {
 	const [formValues, setFormValues] = useState({
+		fname: "",
+		lname: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
@@ -24,6 +26,8 @@ const RegisterForm = () => {
 
 	async function handleSubmit(prevState: any, formData: FormData) {
 		const formValuesData = {
+			fname: formData.get("fname") as string,
+			lname: formData.get("lname") as string,
 			email: formData.get("email") as string,
 			password: formData.get("password") as string,
 			confirmPassword: formData.get("confirmPassword") as string,
@@ -68,6 +72,40 @@ const RegisterForm = () => {
 				</div>
 			</div>
 			<form action={formAction} className="grid grid-cols-1 gap-3">
+				<div className="w-full">
+					<div className="flex justify-between items-center">
+						<p>First name</p>
+						{errors.fname && (
+							<p className="text-red-500 text-xs text-right">
+								{errors.lname}
+							</p>
+						)}
+					</div>
+					<input
+						type="text"
+						name="fname"
+						value={formValues.fname}
+						onChange={handleChange}
+						className="w-full px-2 py-3 border"
+					/>
+				</div>
+				<div className="w-full">
+					<div className="flex justify-between items-center">
+						<p>Last name</p>
+						{errors.lname && (
+							<p className="text-red-500 text-xs text-right">
+								{errors.lname}
+							</p>
+						)}
+					</div>
+					<input
+						type="text"
+						name="lname"
+						value={formValues.lname}
+						onChange={handleChange}
+						className="w-full px-2 py-3 border"
+					/>
+				</div>
 				<div className="w-full">
 					<div className="flex justify-between items-center">
 						<p>Email</p>
@@ -131,6 +169,16 @@ const RegisterForm = () => {
 						Log in
 					</Link>
 				</p>
+				<span className="my-3 text-sm text-center">or</span>
+				<Button
+					type="button"
+					onClick={() => loginWithGithub()}
+					variant={"outline"}
+					className="py-6 rounded-none"
+				>
+					<Github />
+					Login with Github
+				</Button>
 			</form>
 		</div>
 	);

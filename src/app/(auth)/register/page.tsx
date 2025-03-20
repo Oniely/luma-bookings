@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const RegisterPage = () => {
 	return (
-		<div className="relative content-center w-full h-dvh">
+		<div className="relative content-center w-full py-8 min-h-dvh">
 			<Image
 				src="/images/test-bg.jpg"
 				alt="bg"
