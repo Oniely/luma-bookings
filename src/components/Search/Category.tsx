@@ -54,17 +54,17 @@ export default function CategoryCarousel() {
 	};
 
 	return (
-		<div className="w-full flex items-center justify-between gap-2 py-4 padding-container">
+		<div className="flex items-center justify-between w-full gap-2 py-4 padding-container">
 			<Button
 				onClick={handlePrev}
 				variant="outline"
 				size="icon"
 				className="shrink-0"
 			>
-				<ArrowLeft className="h-4 w-4" />
+				<ArrowLeft className="w-4 h-4" />
 			</Button>
 
-			<div className="flex-1 flex justify-center gap-4 overflow-hidden">
+			<div className="flex justify-center flex-1 gap-4 overflow-hidden">
 				{categories
 					.slice(startIndex, startIndex + itemsPerPage)
 					.map((category, index) => (
@@ -73,7 +73,7 @@ export default function CategoryCarousel() {
 							className="flex flex-col items-center cursor-pointer"
 						>
 							<div className="text-2xl">{category.icon}</div>
-							<span className="text-sm mt-1">
+							<span className="mt-1 text-sm">
 								{category.label}
 							</span>
 						</div>
@@ -86,14 +86,14 @@ export default function CategoryCarousel() {
 				size="icon"
 				className="shrink-0"
 			>
-				<ArrowRight className="h-4 w-4" />
+				<ArrowRight className="w-4 h-4" />
 			</Button>
 
 			<Button
 				variant="outline"
-				className="ml-4 shrink-0 flex items-center gap-2"
+				className="flex items-center gap-2 ml-4 shrink-0"
 			>
-				<FilterIcon className="h-4 w-4" />
+				<FilterIcon className="w-4 h-4" />
 				<span>Filter</span>
 			</Button>
 		</div>

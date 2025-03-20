@@ -1,7 +1,5 @@
 import RoomCard from "@/components/Cards/RoomCard";
 import Hero from "@/components/Home/Hero";
-import CategoryCarousel from "@/components/Search/Category";
-import SearchWidget from "@/components/Search/SearchWidget";
 
 export default function Home() {
 	const room = {
@@ -20,8 +18,8 @@ export default function Home() {
 			{/* <section className="w-full h-40">
 				<CategoryCarousel />
 			</section> */}
-			<section className="padding-container max-container h-dvh relative">
-				<div className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-4 py-8">
+			<section className="relative padding-container max-container h-dvh">
+				<div className="grid grid-cols-2 py-8 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
 					<RoomCard room={{ ...room, guest_favorite: true }} />
 					<RoomCard room={room} />
 					<RoomCard room={{ ...room, guest_favorite: true }} />

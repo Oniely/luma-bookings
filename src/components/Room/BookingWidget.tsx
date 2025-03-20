@@ -3,10 +3,10 @@
 import { formatDate } from "@/lib/utils";
 import { ChevronDown, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
-import { Button } from "./ui/button";
-import { Calendar } from "./ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { Separator } from "./ui/separator";
+import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Separator } from "../ui/separator";
 
 interface Props {
 	room?: any;
@@ -36,7 +36,7 @@ const BookingWidget = ({ room }: Props) => {
 	};
 
 	return (
-		<div className="w-full max-w-sm p-5 bg-white border border-secondary-100 rounded-2xl text-black-100 space-y-4">
+		<div className="w-full max-w-sm p-5 bg-white border border-secondary-100 rounded-2xl text-black-100 space-y-4 h-auto max-h-full sticky top-4">
 			<h3 className="text-base">
 				<span className="text-xl font-semibold">$14,560 </span>
 				night
@@ -86,7 +86,13 @@ const BookingWidget = ({ room }: Props) => {
 								<p className="text-xs font-medium uppercase">
 									Guests
 								</p>
-								<span className="text-md">Add guests</span>
+								<span className="text-md">
+									{guests
+										? `${
+												guests.adults + guests.children
+										  } guests`
+										: "Add guests"}
+								</span>
 							</div>
 							<ChevronsUpDown size={24} />
 						</button>
@@ -95,7 +101,7 @@ const BookingWidget = ({ room }: Props) => {
 						className="w-auto p-0 rounded-4xl"
 						align="center"
 					>
-						<div className="flex flex-col p-7 w-[30rem] gap-6">
+						<div className="flex flex-col p-7 w-full gap-6">
 							<div className="flexBetween">
 								<div className="flex flex-col items-start">
 									<span className="font-medium">Adults</span>

@@ -22,7 +22,7 @@ const Navbar = () => {
 					</div>
 				</Link>
 			</div>
-			<div className="gap-3 flexCenter text-current">
+			<div className="gap-3 text-current flexCenter">
 				<Searchbar />
 				<Menu />
 			</div>

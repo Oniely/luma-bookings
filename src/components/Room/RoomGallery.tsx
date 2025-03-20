@@ -3,7 +3,7 @@
 import { Room } from "@/lib/types";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Grip } from "lucide-react";
 
 const RoomGallery = ({ room }: { room: Room }) => {
