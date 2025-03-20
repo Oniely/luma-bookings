@@ -2,6 +2,7 @@ import { Room } from "@/lib/types";
 import { formatAvailableDate } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Props {
 	room: Room;
@@ -11,10 +12,11 @@ const RoomCard = ({ room }: Props) => {
 	return (
 		<Link href={`/room/${room.id}`} passHref>
 			<article className="relative">
-				<div className="flex rounded-2xl">
-					<img
+				<div className="flex rounded-2xl relative w-full h-69">
+					<Image
 						className="aspect-square rounded-2xl object-cover object-center"
 						src={room.photos[0]}
+						fill
 						alt="photo"
 					/>
 				</div>

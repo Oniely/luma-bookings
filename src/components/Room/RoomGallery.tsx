@@ -4,7 +4,7 @@ import { Room } from "@/lib/types";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Grip } from "lucide-react";
+import { Grip, MoveLeft } from "lucide-react";
 
 const RoomGallery = ({ room }: { room: Room }) => {
 	const [showAllPhotos, setShowAllPhotos] = useState(false);
@@ -14,40 +14,34 @@ const RoomGallery = ({ room }: { room: Room }) => {
 			<div className="absolute inset-0 z-50 min-h-screen bg-white">
 				<div className="grid gap-4 p-8 text-white bg-black">
 					<div>
-						<h2 className="mr-40 text-3xl">
+						<h2 className="mr-40 text-2xl">
 							Photos of {room.title}
 						</h2>
 						<button
 							onClick={() => setShowAllPhotos(false)}
-							className="fixed flex gap-1 px-4 py-2 text-black bg-white shadow right-8 top-8 rounded-2xl shadow-black"
+							className="fixed flexCenter gap-1 px-4 py-2 text-black bg-white shadow right-8 top-8 rounded-2xl shadow-black text-md"
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth={1.5}
-								stroke="currentColor"
-								className="w-6 h-6"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M6.75 15.75 3 12m0 0 3.75-3.75M3 12h18"
-								/>
-							</svg>
+							<MoveLeft />
 							<span>Close photos</span>
 						</button>
 					</div>
-					{room?.photos?.length > 0 &&
-						room.photos.map((photo, index) => (
-							<div className="flex justify-center" key={index}>
-								<img
-									className="object-cover object-center"
-									src={`${photo}`}
-									alt="photo"
-								/>
-							</div>
-						))}
+					<div className="flex flex-wrap justify-center gap-4">
+						{room?.photos?.length > 0 &&
+							room.photos.map((photo, index) => (
+								<div
+									className="flex justify-center"
+									key={index}
+								>
+									<Image
+										className="object-cover object-center w-full h-full"
+										src={`${photo}`}
+										width={1920}
+										height={1080}
+										alt="photo"
+									/>
+								</div>
+							))}
+					</div>
 				</div>
 			</div>
 		);

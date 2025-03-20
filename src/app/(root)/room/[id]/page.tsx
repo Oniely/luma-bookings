@@ -8,8 +8,14 @@ import { Room } from "@/lib/types";
 import { Dot, Star } from "lucide-react";
 import { notFound } from "next/navigation";
 
-const Page = ({ params }: { params: { id: string } }) => {
-	const id = params.id;
+interface PageProps {
+	params: Promise<{ id: string }>;
+}
+
+const Page = async ({ params }: PageProps) => {
+	const id = (await params)?.id;
+
+	if (!id) notFound();
 
 	const room = rooms.find((room) => room.id === id);
 
