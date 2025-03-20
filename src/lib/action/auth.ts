@@ -3,14 +3,14 @@
 import { signIn, signOut } from "@/app/auth";
 import axiosClient from "@/lib/axios";
 
-export async function login(email: string, password: string) {
+export async function login(username: string, password: string) {
 	try {
-		if (!email || !password) {
-			throw new Error("Email and password are required");
+		if (!username || !password) {
+			throw new Error("Username and password are required");
 		}
 
 		const res = await axiosClient.post("/login", {
-			email,
+			username,
 			password,
 		});
 
@@ -24,6 +24,7 @@ export async function login(email: string, password: string) {
 export async function register(data: {
 	fname: string;
 	lname: string;
+	username: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
@@ -32,6 +33,10 @@ export async function register(data: {
 	try {
 		if (!data.fname || !data.lname) {
 			throw new Error("First & Last name is required");
+		}
+
+		if (!data.username) {
+			throw new Error("Username is required");
 		}
 
 		const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,8 +49,9 @@ export async function register(data: {
 		}
 
 		const res = await axiosClient.post("/create_user", {
-			fullName: data.fname + data.lname,
-			email: data.email,
+			fullName: data.fname + " " + data.lname,
+			username: data.username,
+			// email: data.email,
 			password: data.confirmPassword,
 			profile_url: data?.profile_url || "/images/default_profile.png",
 		});
@@ -63,10 +69,10 @@ export async function loginWithGithub() {
 	});
 }
 
-export async function loginWithCredential(email: string, password: string) {
+export async function loginWithCredential(username: string, password: string) {
 	try {
 		const response = await signIn("credentials", {
-			email,
+			username,
 			password,
 			redirect: false,
 		});

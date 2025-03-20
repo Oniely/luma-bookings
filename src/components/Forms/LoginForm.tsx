@@ -11,7 +11,8 @@ import { Github, SquareAsterisk } from "lucide-react";
 
 const LoginForm = () => {
 	const [formValues, setFormValues] = useState({
-		email: "",
+		// email: "",
+		username: "",
 		password: "",
 	});
 	const [errors, setErrors] = useState<any>({});
@@ -23,7 +24,8 @@ const LoginForm = () => {
 
 	async function handleSubmit(prevState: any, formData: FormData) {
 		const formValuesData = {
-			email: formData.get("email") as string,
+			// email: formData.get("email") as string,
+			username: formData.get("username") as string,
 			password: formData.get("password") as string,
 		};
 
@@ -39,7 +41,7 @@ const LoginForm = () => {
 		}
 
 		const res = await loginWithCredential(
-			result.data.email,
+			result.data.username,
 			result.data.password
 		);
 
@@ -47,7 +49,6 @@ const LoginForm = () => {
 			setErrors({ email: res.error });
 			return;
 		} else {
-			// save jwt to web (localStorage/sessionStorage)
 			router.push("/");
 		}
 	}
@@ -72,17 +73,17 @@ const LoginForm = () => {
 			<form action={formAction} className="grid grid-cols-1 gap-3">
 				<div className="w-full">
 					<div className="flex justify-between items-center">
-						<p>Email</p>
-						{errors.email && (
+						<p>Username</p>
+						{errors.username && (
 							<p className="text-red-500 text-xs text-right">
-								{errors.email}
+								{errors.username}
 							</p>
 						)}
 					</div>
 					<input
 						type="text"
-						name="email"
-						value={formValues.email}
+						name="username"
+						value={formValues.username}
 						onChange={handleChange}
 						className="w-full px-2 py-3 border"
 					/>

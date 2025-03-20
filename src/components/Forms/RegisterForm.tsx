@@ -13,6 +13,7 @@ const RegisterForm = () => {
 	const [formValues, setFormValues] = useState({
 		fname: "",
 		lname: "",
+		username: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
@@ -28,6 +29,7 @@ const RegisterForm = () => {
 		const formValuesData = {
 			fname: formData.get("fname") as string,
 			lname: formData.get("lname") as string,
+			username: formData.get("username") as string,
 			email: formData.get("email") as string,
 			password: formData.get("password") as string,
 			confirmPassword: formData.get("confirmPassword") as string,
@@ -77,7 +79,7 @@ const RegisterForm = () => {
 						<p>First name</p>
 						{errors.fname && (
 							<p className="text-red-500 text-xs text-right">
-								{errors.lname}
+								{errors.fname}
 							</p>
 						)}
 					</div>
@@ -108,6 +110,23 @@ const RegisterForm = () => {
 				</div>
 				<div className="w-full">
 					<div className="flex justify-between items-center">
+						<p>Username</p>
+						{errors.username && (
+							<p className="text-red-500 text-xs text-right">
+								{errors.username}
+							</p>
+						)}
+					</div>
+					<input
+						type="text"
+						name="username"
+						value={formValues.username}
+						onChange={handleChange}
+						className="w-full px-2 py-3 border"
+					/>
+				</div>
+				<div className="w-full">
+					<div className="flex justify-between items-center">
 						<p>Email</p>
 						{errors.email && (
 							<p className="text-red-500 text-xs text-right">
@@ -116,7 +135,7 @@ const RegisterForm = () => {
 						)}
 					</div>
 					<input
-						type="text"
+						type="email"
 						name="email"
 						value={formValues.email}
 						onChange={handleChange}
