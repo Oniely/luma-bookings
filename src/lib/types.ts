@@ -20,7 +20,8 @@ export interface Transaction {
 	reservation_id: string;
 	user_id: string;
 	room_id: string;
-	event_id: string;
+	package_id?: string;
+	event_id?: string;
 	reservation_date_start: Date;
 	reservation_date_end: Date;
 	reservation_total_payment_amount: number;

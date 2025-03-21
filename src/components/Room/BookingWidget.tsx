@@ -133,7 +133,6 @@ const BookingWidget = ({ room }: Props) => {
 								<Calendar
 									mode="range"
 									selected={dateRange}
-									// @ts-ignore
 									onSelect={setDateRange}
 									numberOfMonths={2}
 									classNames={{
