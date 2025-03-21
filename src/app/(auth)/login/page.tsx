@@ -1,7 +1,15 @@
+import { auth } from "@/app/auth";
 import LoginForm from "@/components/Forms/LoginForm";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+	const session = await auth();
+
+	if (session) {
+		redirect("/");
+	}
+
 	return (
 		<div className="relative content-center w-full py-8 min-h-dvh">
 			<Image

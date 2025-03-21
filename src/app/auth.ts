@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
 import Github from "next-auth/providers/github";
 import Credential from "next-auth/providers/credentials";
-import { login } from "@/lib/action/auth";
+import { login, token_exchange } from "@/lib/action/auth";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	providers: [
@@ -45,16 +46,27 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	callbacks: {
 		async jwt({ token, user, account }) {
 			if (user) {
+				let decodedToken;
+
 				if (account && account.provider === "github") {
 					token.accessToken = account.access_token;
+					token.provider = "github";
+
+					const data = await token_exchange(account.access_token!);
+					decodedToken = jwtDecode(data.token);
 				} else {
 					token.accessToken = user;
+					token.provider = "credentials";
+
+					decodedToken = jwtDecode(user.token);
 				}
+				token.user = decodedToken;
 			}
 			return token;
 		},
-		async session({ session, token }) {
+		async session({ session, token, user }) {
 			session.accessToken = token.accessToken;
+			session.user = token.user;
 			return session;
 		},
 	},

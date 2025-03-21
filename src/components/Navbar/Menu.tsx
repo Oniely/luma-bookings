@@ -10,7 +10,6 @@ import {
 } from "../ui/dropdown-menu";
 import Link from "next/link";
 import { auth } from "@/app/auth";
-import { Button } from "../ui/button";
 import { logout } from "@/lib/action/auth";
 
 const Menu = async () => {

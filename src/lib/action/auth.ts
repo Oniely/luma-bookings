@@ -88,3 +88,15 @@ export async function logout() {
 		redirectTo: "/login",
 	});
 }
+
+export async function token_exchange(token: string) {
+	try {
+		const response = await axiosClient.post("/login_github", {
+			AUTH_TOKEN: token,
+		});
+
+		return response.data;
+	} catch (error: any) {
+		return null;
+	}
+}
