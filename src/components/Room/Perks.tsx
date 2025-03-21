@@ -108,7 +108,7 @@ const Perks = ({
 							</span>
 						</Button>
 					</DialogTrigger>
-					<DialogContent className="sm:max-w-md">
+					<DialogContent className="sm:max-w-md h-[90%] sm:h-auto overflow-y-auto">
 						<DialogHeader>
 							<DialogTitle>All Amenities</DialogTitle>
 						</DialogHeader>

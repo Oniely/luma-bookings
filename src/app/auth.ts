@@ -51,7 +51,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				if (account && account.provider === "github") {
 					token.accessToken = account.access_token;
 					token.provider = "github";
-
+					// TODO: add a creeate user for github login
 					const data = await token_exchange(account.access_token!);
 					decodedToken = jwtDecode(data.token);
 				} else {

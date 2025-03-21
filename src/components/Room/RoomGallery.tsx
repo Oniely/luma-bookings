@@ -14,7 +14,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 			<div className="absolute inset-0 z-50 min-h-screen bg-white">
 				<div className="grid gap-4 p-8 text-white bg-black">
 					<div>
-						<h2 className="mr-40 text-2xl">
+						<h2 className="mr-40 text-lg md:text-2xl">
 							Photos of {room.title}
 						</h2>
 						<button
@@ -49,7 +49,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 
 	return (
 		<div className="relative">
-			<div className="mx-auto max-w-7xl rounded-2xl overflow-hidden h-[450px]">
+			<div className="mx-auto max-w-7xl rounded-2xl overflow-hidden h-[600px] lg:h-[450px]">
 				<div className="grid w-full h-full grid-cols-1 gap-2 md:grid-cols-4">
 					<div className="md:col-span-2">
 						<div className="relative w-full h-full">
@@ -75,7 +75,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</div>
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[1]}
+								src={room.photos[2]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"
@@ -84,7 +84,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</div>
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[1]}
+								src={room.photos[3]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"
@@ -93,7 +93,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</div>
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[1]}
+								src={room.photos[4]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"
