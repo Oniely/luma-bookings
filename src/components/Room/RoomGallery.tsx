@@ -15,7 +15,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 				<div className="grid gap-4 p-8 text-white bg-black">
 					<div>
 						<h2 className="mr-40 text-lg md:text-2xl">
-							Photos of {room.title}
+							Photos of {room.room_name}
 						</h2>
 						<button
 							onClick={() => setShowAllPhotos(false)}
@@ -26,8 +26,8 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</button>
 					</div>
 					<div className="flex flex-wrap justify-center gap-4">
-						{room?.photos?.length > 0 &&
-							room.photos.map((photo, index) => (
+						{room?.room_img_url?.length > 0 &&
+							room.room_img_url.map((photo, index) => (
 								<div
 									className="flex justify-center"
 									key={index}
@@ -54,7 +54,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 					<div className="md:col-span-2">
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[0]}
+								src={room.room_img_url[0]}
 								alt="Main view"
 								fill
 								className="object-cover w-full h-full"
@@ -66,7 +66,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 					<div className="grid w-full h-full grid-cols-2 col-span-2 gap-2">
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[1]}
+								src={room.room_img_url[1]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"
@@ -75,7 +75,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</div>
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[2]}
+								src={room.room_img_url[2]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"
@@ -84,7 +84,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</div>
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[3]}
+								src={room.room_img_url[3]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"
@@ -93,7 +93,7 @@ const RoomGallery = ({ room }: { room: Room }) => {
 						</div>
 						<div className="relative w-full h-full">
 							<Image
-								src={room.photos[4]}
+								src={room.room_img_url[4]}
 								alt="Room Photo"
 								fill
 								className="object-cover w-full h-full"

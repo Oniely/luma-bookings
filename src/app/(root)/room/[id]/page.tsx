@@ -3,6 +3,7 @@ import RoomGallery from "@/components/Room/RoomGallery";
 import RoomInformation from "@/components/Room/RoomInformation";
 import UserReviews from "@/components/Room/UserReviews";
 import { Separator } from "@/components/ui/separator";
+import { getRoom } from "@/lib/action/rooms";
 import { rooms } from "@/lib/mock_data";
 import { Dot, Star } from "lucide-react";
 import { notFound } from "next/navigation";
@@ -16,7 +17,7 @@ const Page = async ({ params }: PageProps) => {
 
 	if (!id) notFound();
 
-	const room = rooms.find((room) => room.id === id);
+	const { data: room } = await getRoom(id);
 
 	if (!room) notFound();
 

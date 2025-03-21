@@ -12,7 +12,7 @@ const RoomInformation = ({ room }: Props) => {
 	return (
 		<div className="flex flex-col max-w-full col-span-2 gap-6 lg:max-w-3xl">
 			<div>
-				<h1 className="text-xl">{room.title}</h1>
+				<h1 className="text-xl">{room.room_name}</h1>
 				<div className="inline-flex">
 					<span>4 guests</span>
 					<Dot />
@@ -22,9 +22,8 @@ const RoomInformation = ({ room }: Props) => {
 					<Dot />
 					<span>1 bath</span>
 				</div>
-				{room.guestFavorite ? (
+				{room.room_is_guest_favorite ? (
 					<div className="border rounded-xl border-white flex items-center justify-around my-8 p-5 h-[6rem]">
-						ds
 						<div className="gap-5 leading-none flexCenter">
 							<p className="text-lg font-medium text-center">
 								Guest <br /> favorite
@@ -69,7 +68,7 @@ const RoomInformation = ({ room }: Props) => {
 			</div>
 			<Separator />
 			<div>
-				<RoomDescription desc={room.description} />
+				<RoomDescription desc={room.room_description} />
 			</div>
 			<Separator className="my-2" />
 			<div>

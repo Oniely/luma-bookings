@@ -34,7 +34,7 @@ const BookingWidget = ({ room }: Props) => {
 	});
 
 	const totalGuests = guests.adults + guests.children;
-	const isGuestLimitReached = totalGuests >= room.maxGuest;
+	const isGuestLimitReached = totalGuests >= room.room_max_guests;
 	const nightsOfStay =
 		dateRange.to && dateRange.from
 			? Math.ceil(
@@ -68,9 +68,9 @@ const BookingWidget = ({ room }: Props) => {
 			return;
 		}
 
-		if (totalGuests > room.maxGuest) {
+		if (totalGuests > room.room_max_guests) {
 			toast.warning(
-				`Maximum ${room.maxGuest} guests allowed for this room`
+				`Maximum ${room.room_max_guests} guests allowed for this room`
 			);
 			return;
 		}
@@ -81,8 +81,8 @@ const BookingWidget = ({ room }: Props) => {
 			adults: guests.adults.toString(),
 			children: guests.children.toString(),
 			nights: nightsOfStay.toString(),
-			roomPrice: room.price.toString(),
-			maxGuest: room.maxGuest.toString(),
+			roomPrice: room.room_price.toString(),
+			maxGuest: room.room_max_guests.toString(),
 		});
 
 		router.push(`/booking-confirmation?${searchParams.toString()}`);
@@ -96,7 +96,7 @@ const BookingWidget = ({ room }: Props) => {
 				<div className="sticky w-full h-auto max-w-sm max-h-full p-5 space-y-4 bg-white border border-secondary-100 rounded-2xl text-black-100 top-4">
 					<h3 className="text-base">
 						<span className="text-xl font-semibold">
-							${room.price}{" "}
+							${room.room_price}{" "}
 						</span>
 						night
 					</h3>
@@ -153,7 +153,7 @@ const BookingWidget = ({ room }: Props) => {
 										</p>
 										<span className="text-md">
 											{totalGuests > 0
-												? `${totalGuests} guests (max ${room.maxGuest})`
+												? `${totalGuests} guests (max ${room.room_max_guests})`
 												: "Add guests"}
 										</span>
 									</div>
@@ -263,8 +263,8 @@ const BookingWidget = ({ room }: Props) => {
 					</p>
 					<div className="space-y-2">
 						<div className="flexBetween">
-							<p className="underline">{`$${room.price} x ${nightsOfStay} nights`}</p>
-							<p>{`$${room.price * nightsOfStay}`}</p>
+							<p className="underline">{`$${room.room_price} x ${nightsOfStay} nights`}</p>
+							<p>{`$${room.room_price * nightsOfStay}`}</p>
 						</div>
 						{/* <div className="flexBetween">
 						<p className="underline">{`Booking fee`}</p>
@@ -275,7 +275,7 @@ const BookingWidget = ({ room }: Props) => {
 					{/* separator */}
 					<div className="text-lg font-semibold flexBetween">
 						<p>Total</p>
-						<p>{`$${room.price * nightsOfStay}`}</p>
+						<p>{`$${room.room_price * nightsOfStay}`}</p>
 					</div>
 				</div>
 			</div>
