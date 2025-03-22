@@ -2,7 +2,7 @@ import NextAuth, { DefaultSession } from "next-auth";
 
 declare module "next-auth" {
 	interface Session {
-		accessToken: string | unknown;
+		accessToken: string;
 		user: AdapterUser;
 	}
 	interface User {

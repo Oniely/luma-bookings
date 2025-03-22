@@ -5,11 +5,12 @@ import { formatDate } from "@/lib/utils";
 import { ChevronsUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Separator } from "../ui/separator";
+import { useBookingStore } from "@/lib/store/bookingStore";
+import { toast } from "sonner";
 
 interface Props {
 	room: Room;
@@ -22,6 +23,11 @@ interface RangeDate {
 
 const BookingWidget = ({ room }: Props) => {
 	const router = useRouter();
+	const {
+		setDates,
+		setGuests: setGuestState,
+		setRoomDetails,
+	} = useBookingStore();
 
 	const [dateRange, setDateRange] = useState<RangeDate | any>({
 		from: null,
@@ -41,7 +47,7 @@ const BookingWidget = ({ room }: Props) => {
 					(dateRange.to.getTime() - dateRange.from.getTime()) /
 						(1000 * 60 * 60 * 24)
 			  )
-			: 1;
+			: 0;
 
 	const updateGuestCount = (
 		type: "adults" | "children",
@@ -57,9 +63,14 @@ const BookingWidget = ({ room }: Props) => {
 		}));
 	};
 
-	const handleReserve = () => {
+	const handleBooking = () => {
 		if (!dateRange.from || !dateRange.to) {
 			toast.warning("Please select check-in and check-out dates");
+			return;
+		}
+
+		if (dateRange.from == dateRange.to) {
+			toast.warning("Please select an appropriate check-out date");
 			return;
 		}
 
@@ -75,18 +86,16 @@ const BookingWidget = ({ room }: Props) => {
 			return;
 		}
 
-		const searchParams = new URLSearchParams({
-			checkIn: dateRange.from?.toISOString() || "",
-			checkOut: dateRange.to?.toISOString() || "",
-			adults: guests.adults.toString(),
-			children: guests.children.toString(),
-			nights: nightsOfStay.toString(),
-			roomPrice: room.room_price.toString(),
-			maxGuest: room.room_max_guests.toString(),
+		setDates(dateRange.from, dateRange.to);
+		setGuestState(guests.adults, guests.children);
+		setRoomDetails({
+			id: room.room_id,
+			price: room.room_price,
+			maxGuests: room.room_max_guests,
+			name: room.room_name,
 		});
 
-		router.push(`/booking-confirmation?${searchParams.toString()}`);
-		return;
+		router.push("/booking-confirmation");
 	};
 
 	return (
@@ -253,9 +262,9 @@ const BookingWidget = ({ room }: Props) => {
 					<Button
 						className="w-full text-lg py-7"
 						size={"lg"}
-						onClick={handleReserve}
+						onClick={handleBooking}
 					>
-						Reserve
+						Book now
 					</Button>
 					<p className="text-sm text-center">
 						*You won&apos;t be charged yet.
@@ -280,7 +289,7 @@ const BookingWidget = ({ room }: Props) => {
 			</div>
 			{/* mobile */}
 			<div className="sm:hidden">
-				{/* TODO MOBILE FOR BOOKING WIDGET */}
+				{/* TODO: MOBILE FOR BOOKING WIDGET */}
 				<div></div>
 			</div>
 		</>

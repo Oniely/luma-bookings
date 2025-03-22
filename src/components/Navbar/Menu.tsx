@@ -26,7 +26,7 @@ const Menu = async () => {
 			<DropdownMenuContent className="w-56" align="end">
 				<DropdownMenuLabel>My Account</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				{session?.user ? null : (
+				{!session?.user ? (
 					<>
 						<DropdownMenuGroup>
 							<DropdownMenuItem asChild>
@@ -38,9 +38,22 @@ const Menu = async () => {
 						</DropdownMenuGroup>
 						<DropdownMenuSeparator />
 					</>
+				) : (
+					<>
+						<DropdownMenuGroup>
+							<DropdownMenuItem asChild>
+								<Link href="/profile">Profile</Link>
+							</DropdownMenuItem>
+							<DropdownMenuItem asChild>
+								<Link href="/profile?tab=2">
+									Your reservations
+								</Link>
+							</DropdownMenuItem>
+						</DropdownMenuGroup>
+						<DropdownMenuSeparator />
+					</>
 				)}
 				<DropdownMenuGroup>
-					<DropdownMenuItem>Profile</DropdownMenuItem>
 					<DropdownMenuItem>GitHub</DropdownMenuItem>
 					<DropdownMenuItem>Support</DropdownMenuItem>
 				</DropdownMenuGroup>

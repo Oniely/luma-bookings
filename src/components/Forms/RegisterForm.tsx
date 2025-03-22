@@ -22,6 +22,7 @@ const RegisterForm = () => {
 	const router = useRouter();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setErrors({ ...errors, [e.target.name]: "" });
 		setFormValues({ ...formValues, [e.target.name]: e.target.value });
 	};
 
@@ -74,39 +75,41 @@ const RegisterForm = () => {
 				</div>
 			</div>
 			<form action={formAction} className="grid grid-cols-1 gap-3">
-				<div className="w-full">
-					<div className="flex justify-between items-center">
-						<p>First name</p>
-						{errors.fname && (
-							<p className="text-red-500 text-xs text-right">
-								{errors.fname}
-							</p>
-						)}
+				<div className="grid grid-cols-2 gap-3">
+					<div className="w-full">
+						<div className="flex justify-between items-center">
+							<p>First name</p>
+							{errors.fname && (
+								<p className="text-red-500 text-xs text-right">
+									{errors.fname}
+								</p>
+							)}
+						</div>
+						<input
+							type="text"
+							name="fname"
+							value={formValues.fname}
+							onChange={handleChange}
+							className="w-full px-2 py-3 border"
+						/>
 					</div>
-					<input
-						type="text"
-						name="fname"
-						value={formValues.fname}
-						onChange={handleChange}
-						className="w-full px-2 py-3 border"
-					/>
-				</div>
-				<div className="w-full">
-					<div className="flex justify-between items-center">
-						<p>Last name</p>
-						{errors.lname && (
-							<p className="text-red-500 text-xs text-right">
-								{errors.lname}
-							</p>
-						)}
+					<div className="w-full">
+						<div className="flex justify-between items-center">
+							<p>Last name</p>
+							{errors.lname && (
+								<p className="text-red-500 text-xs text-right">
+									{errors.lname}
+								</p>
+							)}
+						</div>
+						<input
+							type="text"
+							name="lname"
+							value={formValues.lname}
+							onChange={handleChange}
+							className="w-full px-2 py-3 border"
+						/>
 					</div>
-					<input
-						type="text"
-						name="lname"
-						value={formValues.lname}
-						onChange={handleChange}
-						className="w-full px-2 py-3 border"
-					/>
 				</div>
 				<div className="w-full">
 					<div className="flex justify-between items-center">

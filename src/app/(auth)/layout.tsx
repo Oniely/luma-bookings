@@ -1,12 +1,4 @@
-import type { Metadata } from "next";
-import { Lato } from "next/font/google";
-import "../globals.css";
-
-const latoFont = Lato({
-	subsets: ["latin"],
-	weight: ["100", "300", "400", "700", "900"],
-	variable: "--font-lato",
-});
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Luma Bookings",
@@ -14,16 +6,10 @@ export const metadata: Metadata = {
 		"Luma Bookings is a cutting‐edge hotel booking platform designed specifically for modern travelers. The app streamlines the entire process of finding and reserving the perfect accommodation, whether you’re exploring a bustling city or seeking a quiet retreat.",
 };
 
-export default function RootLayout({
+export default function AuthLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html lang="en">
-			<body className={`${latoFont.variable} antialiased`}>
-				{children}
-			</body>
-		</html>
-	);
+	return <div>{children}</div>;
 }

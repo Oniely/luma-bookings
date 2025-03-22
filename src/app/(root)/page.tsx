@@ -3,10 +3,10 @@ import Hero from "@/components/Home/Hero";
 import RoomCardsSkeleton from "@/components/Room/RoomCardSkeleton";
 import { getAllRooms } from "@/lib/action/rooms";
 import { Room } from "@/lib/types";
-import { Suspense } from "react";
+import { Suspense, use } from "react";
 
-async function RoomsList() {
-	const { data, error } = await getAllRooms();
+function RoomsList() {
+	const { data, error } = use(getAllRooms());
 
 	if (error) {
 		return (

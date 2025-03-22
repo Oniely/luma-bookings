@@ -18,7 +18,7 @@ const RoomDescription = ({ desc }: Props) => {
 	return (
 		<div>
 			<p className="text-md leading-6">{truncatedText}</p>
-			{desc.length > 10 && (
+			{desc.length > 300 && (
 				<Dialog>
 					<DialogTrigger asChild>
 						<button className="text-sm mt-2 underline underline-offset-2 text-secondary-100">

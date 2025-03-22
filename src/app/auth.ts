@@ -5,7 +5,7 @@ import { login, token_exchange } from "@/lib/action/auth";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const { handlers, signIn, signOut, auth, unstable_update } = NextAuth({
 	providers: [
 		Github,
 		Credential({
@@ -44,28 +44,38 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		signIn: "/login",
 	},
 	callbacks: {
-		async jwt({ token, user, account }) {
+		async jwt({ token, user, account, trigger, session }) {
 			if (user) {
 				let decodedToken;
 
 				if (account && account.provider === "github") {
-					token.accessToken = account.access_token;
+					const token = await token_exchange(account.access_token!);
+					token.accessToken = token;
 					token.provider = "github";
+
 					// TODO: add a creeate user for github login
-					const data = await token_exchange(account.access_token!);
-					decodedToken = jwtDecode(data.token);
+
+					decodedToken = jwtDecode(token);
 				} else {
-					token.accessToken = user;
+					token.accessToken = user.token;
 					token.provider = "credentials";
 
 					decodedToken = jwtDecode(user.token);
 				}
 				token.user = decodedToken;
 			}
+			if (trigger === "update") {
+				token.user = {
+					...(token.user || {}),
+					fullName: session.user.fullName,
+					username: session.user.username,
+				};
+			}
+
 			return token;
 		},
 		async session({ session, token, user }) {
-			session.accessToken = token.accessToken;
+			session.accessToken = token.accessToken as string;
 			session.user = token.user;
 			return session;
 		},
@@ -79,6 +89,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			);
 		},
 		async signOut({ token }: any) {
+			// TODO: need to test if working, after logging out from a github account, test the github token at the github api
 			if (token?.githubToken) {
 				try {
 					await axios.delete(

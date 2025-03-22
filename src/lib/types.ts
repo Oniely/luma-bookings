@@ -1,5 +1,15 @@
 import { PerkName } from "@/components/Room/Perks";
 
+// TYPES in CLIENT
+export interface UserSession {
+	user_id: string;
+	fullName: string;
+	username: string;
+	profile_url: string;
+	exp: string;
+}
+
+// MODELS
 export interface Room {
 	room_id: string;
 	room_name: string;

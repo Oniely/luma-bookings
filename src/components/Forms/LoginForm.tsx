@@ -1,6 +1,6 @@
 "use client";
 
-import { login, loginWithCredential, loginWithGithub } from "@/lib/action/auth";
+import { loginWithCredential, loginWithGithub } from "@/lib/action/auth";
 import { loginSchema } from "@/lib/schema/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,7 @@ const LoginForm = () => {
 	const router = useRouter();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setErrors({ ...errors, [e.target.name]: "" });
 		setFormValues({ ...formValues, [e.target.name]: e.target.value });
 	};
 
