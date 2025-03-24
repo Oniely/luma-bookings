@@ -4,8 +4,6 @@ import RoomInformation from "@/components/Room/RoomInformation";
 import UserReviews from "@/components/Room/UserReviews";
 import { Separator } from "@/components/ui/separator";
 import { getRoom } from "@/lib/action/rooms";
-import { rooms } from "@/lib/mock_data";
-import { Dot, Star } from "lucide-react";
 import { notFound } from "next/navigation";
 
 interface PageProps {

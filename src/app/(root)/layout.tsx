@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import { Metadata } from "next";
 
@@ -13,9 +14,10 @@ export default function AppLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<div>
+		<>
 			<Navbar />
-			{children}
-		</div>
+			<main className="relative overflow-hidden">{children}</main>
+			<Footer />
+		</>
 	);
 }

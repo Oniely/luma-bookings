@@ -45,7 +45,7 @@ const Menu = async () => {
 								<Link href="/profile">Profile</Link>
 							</DropdownMenuItem>
 							<DropdownMenuItem asChild>
-								<Link href="/profile?tab=2">
+								<Link href="/profile/reservations">
 									Your reservations
 								</Link>
 							</DropdownMenuItem>

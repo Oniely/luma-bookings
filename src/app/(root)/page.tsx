@@ -33,7 +33,7 @@ export default async function Home() {
 	return (
 		<>
 			<Hero />
-			<section className="relative py-8 padding-container max-container h-dvh">
+			<section className="relative py-8 padding-container max-container min-h-dvh">
 				<h1 className="text-3xl font-medium font-canela">
 					Available Rooms
 				</h1>
