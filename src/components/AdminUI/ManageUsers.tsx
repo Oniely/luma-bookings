@@ -2,75 +2,39 @@
 
 import React, { useState } from "react";
 import { faker } from "@faker-js/faker";
+import { UserData } from "@/lib/types";
+import AdminUser from "./AdminUser/AdminUser";
 
-// Define the Users type
-type Users = {
-  uid?: string;
-  name: string;
-  address: string;
-  phone?: string;
-  email?: string;
-};
 
-const generateUsers = () => {
-  const users: Users[] = [];
-  const statuses = ["Intéressé", "Demande contact", "Attente de visite"];
-  for (let i = 0; i < 10; i++) {
-    const firstName = faker.person.firstName();
-    const lastName = faker.person.lastName();
-    const user: Users = {
-      uid: faker.string.uuid(),
-      name: `${firstName} ${lastName}`,
-      address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.state()} ${faker.address.zipCode()} ${faker.address.country()}`,
-      phone: faker.phone.number(),
-      email: `${firstName.toLowerCase()}${lastName.toLowerCase()}@gmail.com`,
-    };
-    users.push(user);
-  }
-  return users;
-};
+// const generateUsers = () => {
+//   const users: Users[] = [];
+//   for (let i = 0; i < 10; i++) {
+//     const firstName = faker.person.firstName();
+//     const lastName = faker.person.lastName();
+//     const user: Users = {
+//       uid: faker.string.uuid(),
+//       name: `${firstName} ${lastName}`,
+//       address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.state()} ${faker.address.zipCode()} ${faker.address.country()}`,
+//       phone: faker.phone.number(),
+//       email: `${firstName.toLowerCase()}${lastName.toLowerCase()}@gmail.com`,
+//     };
+//     users.push(user);
+//   }
+//   return users;
+// };
 
-const ManageUsers: React.FC = () => {
-  const [users, setUsers] = useState<Users[]>(generateUsers());
-  const [selectedUser, setSelectedUser] = useState<Users | null>(users[0]);
+const ManageUsers = ({userData}: {userData: UserData[]}) => {
+  const [users, setUsers] = useState(userData);
 
   return (
     <div>
       <div style={styles.container}>
         <div style={styles.sidebar}>
           <div style={{ height: "100%", overflowY: "auto" }}>
-            {users.map((user) => (
-              <div
-                key={user.uid}
-                className={`sidebar-item ${selectedUser?.uid === user.uid ? "selected" : ""}`}
-                onClick={() => setSelectedUser(user)}
-                style={{
-                  ...styles.candidateItem,
-                  border: selectedUser?.uid === user.uid ? "2px solid #007bff" : "1px solid #ccc",
-                  boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)",
-                  backgroundColor: selectedUser?.uid === user.uid ? "#e0e0e0" : "white",
-                  margin: "10px 0",
-                }}
-              >
-                <div style={styles.userAvatar}>{user.name.charAt(0)}</div>
-                <div style={styles.userInfo}>
-                  <div style={styles.userName}>{user.name}</div>
-                  <div style={styles.userEmail}>{user.email}</div>
-                </div>
-              </div>
-            ))}
+            {users.map((user) => <AdminUser user={user}/> )}
           </div>
         </div>
         <div style={styles.mainContent}>
-          {selectedUser && (
-            <>
-              <h1>{selectedUser.name}</h1>
-              <p>User ID: {selectedUser.uid}</p>
-              <p>Email: {selectedUser.email}</p>
-              <p>Phone Number: {selectedUser.phone}</p>
-              <p>Address: {selectedUser.address}</p>
-            </>
-          )}
         </div>
       </div>
     </div>
