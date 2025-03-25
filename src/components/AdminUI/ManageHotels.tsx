@@ -1,113 +1,115 @@
 "use client";
 
 import React, { useState } from "react";
+import { Room } from "@/lib/types";
+import AdminRoomCard from "./AdminRoom/AdminRoomCard";
 
 // Mock Data
-const mockData = [
-  {
-    id: "qsw4523eds2wefw",
-    title: "San Monica estate",
-    image: "/src/assets/test-bg.jpg",
-    location: "SFBay, San Francisco, Financial District",
-    price: "$75",
-    dateAdded: "05/11/2022 4:40 PM (PST)",
-    host: {
-      name: "Frank Williams",
-      email: "frankie@leafsy.com",
-      phone: "(412) 436-7221",
-      avatar: "/frank.jpg",
-    },
-  },
-  {
-    id: "qsw4523eds2wefw1",
-    title: "New York estate",
-    image: "/test-bg.jpg",
-    location: "New York, Manhattan",
-    price: "$100",
-    dateAdded: "05/12/2022 4:40 PM (PST)",
-    host: {
-      name: "John Doe",
-      email: "john.doe@example.com",
-      phone: "(123) 456-7890",
-      avatar: "/john.jpg",
-    },
-  },
-  {
-    id: "qsw4523eds2wefw2",
-    title: "Los Angeles estate",
-    image: "/test-bg.jpg",
-    location: "Los Angeles, California",
-    price: "$80",
-    dateAdded: "05/13/2022 4:40 PM (PST)",
-    host: {
-      name: "Jane Doe",
-      email: "jane.doe@example.com",
-      phone: "(987) 654-3210",
-      avatar: "/jane.jpg",
-    },
-  },
-];
+// const mockData = [
+//   {
+//     id: "qsw4523eds2wefw",
+//     title: "San Monica estate",
+//     image: "/src/assets/test-bg.jpg",
+//     location: "SFBay, San Francisco, Financial District",
+//     price: "$75",
+//     dateAdded: "05/11/2022 4:40 PM (PST)",
+//     host: {
+//       name: "Frank Williams",
+//       email: "frankie@leafsy.com",
+//       phone: "(412) 436-7221",
+//       avatar: "/frank.jpg",
+//     },
+//   },
+//   {
+//     id: "qsw4523eds2wefw1",
+//     title: "New York estate",
+//     image: "/test-bg.jpg",
+//     location: "New York, Manhattan",
+//     price: "$100",
+//     dateAdded: "05/12/2022 4:40 PM (PST)",
+//     host: {
+//       name: "John Doe",
+//       email: "john.doe@example.com",
+//       phone: "(123) 456-7890",
+//       avatar: "/john.jpg",
+//     },
+//   },
+//   {
+//     id: "qsw4523eds2wefw2",
+//     title: "Los Angeles estate",
+//     image: "/test-bg.jpg",
+//     location: "Los Angeles, California",
+//     price: "$80",
+//     dateAdded: "05/13/2022 4:40 PM (PST)",
+//     host: {
+//       name: "Jane Doe",
+//       email: "jane.doe@example.com",
+//       phone: "(987) 654-3210",
+//       avatar: "/jane.jpg",
+//     },
+//   },
+// ];
 
-const ManageHotels = () => {
+const ManageHotels = ({roomData}: {roomData: Room[]}) => {
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(mockData);
+  const [data, setData] = useState(roomData);
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const [nameFilter, setNameFilter] = useState("");
   const [dateAddedFilter, setDateAddedFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
 
-const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  setSearch(e.target.value);
-  const filteredData = mockData.filter((item) => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
-  setData(filteredData);
-};
+// const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//   setSearch(e.target.value);
+//   const filteredData = mockData.filter((item) => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
+//   setData(filteredData);
+// };
 
-const handleNameFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  setNameFilter(e.target.value);
-  const filteredData = mockData.sort((a, b) => {
-    if (e.target.value === "asc") {
-      return a.title.localeCompare(b.title);
-    } else if (e.target.value === "desc") {
-      return b.title.localeCompare(a.title);
-    } else {
-      return 0;
-    }
-  });
-  setData(filteredData);
-};
+// const handleNameFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//   setNameFilter(e.target.value);
+//   const filteredData = mockData.sort((a, b) => {
+//     if (e.target.value === "asc") {
+//       return a.title.localeCompare(b.title);
+//     } else if (e.target.value === "desc") {
+//       return b.title.localeCompare(a.title);
+//     } else {
+//       return 0;
+//     }
+//   });
+//   setData(filteredData);
+// };
 
-const handleDateAddedFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDateAddedFilter(e.target.value);
-    const filteredData = mockData.sort((a, b) => {
-      if (e.target.value === "asc") {
-        return a.dateAdded.localeCompare(b.dateAdded);
-      } else if (e.target.value === "desc") {
-        return b.dateAdded.localeCompare(a.dateAdded);
-      } else {
-        return 0;
-      }
-    });
-    setData(filteredData);
-  };
+// const handleDateAddedFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setDateAddedFilter(e.target.value);
+//     const filteredData = mockData.sort((a, b) => {
+//       if (e.target.value === "asc") {
+//         return a.dateAdded.localeCompare(b.dateAdded);
+//       } else if (e.target.value === "desc") {
+//         return b.dateAdded.localeCompare(a.dateAdded);
+//       } else {
+//         return 0;
+//       }
+//     });
+//     setData(filteredData);
+//   };
 
-  const handlePriceFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPriceFilter(e.target.value);
-    const filteredData = mockData.sort((a, b) => {
-      if (e.target.value === "asc") {
-        return a.price.localeCompare(b.price);
-      } else if (e.target.value === "desc") {
-        return b.price.localeCompare(a.price);
-      } else {
-        return 0;
-      }
-    });
-    setData(filteredData);
-  };
+//   const handlePriceFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+//     setPriceFilter(e.target.value);
+//     const filteredData = mockData.sort((a, b) => {
+//       if (e.target.value === "asc") {
+//         return a.price.localeCompare(b.price);
+//       } else if (e.target.value === "desc") {
+//         return b.price.localeCompare(a.price);
+//       } else {
+//         return 0;
+//       }
+//     });
+//     setData(filteredData);
+//   };
 
-const handleDelete = (id: string) => {
-  const filteredData = mockData.filter((item) => item.id !== id);
-  setData(filteredData);
-};
+// const handleDelete = (id: string) => {
+//   const filteredData = mockData.filter((item) => item.id !== id);
+//   setData(filteredData);
+// };
 
 return (
   <div style={styles.container}>
@@ -124,12 +126,12 @@ return (
           type="text"
           placeholder="Search properties"
           value={search}
-          onChange={handleSearchChange}
+          onChange={() => {}}
           style={styles.searchInput}
         />
         <select
           value={nameFilter}
-          onChange={handleNameFilterChange}
+          onChange={() => {}}
           style={{
             padding: "8px",
             width: "200px",
@@ -144,7 +146,7 @@ return (
 
         <select
           value={dateAddedFilter}
-          onChange={handleDateAddedFilterChange}
+          onChange={() => {}}
           style={{
             padding: "8px",
             width: "200px",
@@ -159,7 +161,7 @@ return (
 
         <select
           value={priceFilter}
-          onChange={handlePriceFilterChange}
+          onChange={() => {}}
           style={{
             padding: "8px",
             width: "200px",
@@ -176,30 +178,12 @@ return (
 
       <div style={styles.table}>
         {data.map((item) => (
-          <div key={item.id} style={styles.row}>
-            <img src={item.image} style={styles.image} />
-            <div style={styles.details}>
-              <h3>{item.title}</h3>
-              <p>ID: <span>{item.id}</span></p>
-              <p>{item.location}</p>
-              <p>Price: {item.price}</p>
-              <p>Date Added: {item.dateAdded}</p>
-            </div>
-            <div style={styles.host}>
-              <p>{item.host.name}</p>
-              <p>{item.host.email}</p>
-              <p>{item.host.phone}</p>
-            </div>
-            <div style={styles.actions}>
-              <button style={styles.menuButton} onClick={() => setMenuOpen(menuOpen === item.id ? null : item.id)}>⋮</button>
-              {menuOpen === item.id && (
-                <div style={styles.dropdown}>
-                  <div style={styles.dropdownItem} onClick={() => console.log("Edit", item.id)}>Edit</div>
-                  <div style={styles.dropdownItem} onClick={() => handleDelete(item.id)}>Delete</div>
-                </div>
-              )}
-            </div>
-          </div>
+          <AdminRoomCard key={item.room_id} room_id={item.room_id}
+           room_name={item.room_name}
+          room_description={item.room_description} 
+          room_img_url={item.room_img_url} 
+          room_price={item.room_price} 
+          room_max_guests={item.room_max_guests} />
         ))}
       </div>
 

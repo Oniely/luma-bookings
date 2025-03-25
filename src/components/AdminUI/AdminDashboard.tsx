@@ -48,7 +48,7 @@ export default function AdminDashboard() {
   return (
     <div>
       <nav className="flex flex-col items-start align-center justify-content-center px-8 py-4 bg-white shadow-md sticky top-0 z-10">
-        <text className="text-3xl font-semibold text-center">Admin Dashboard</text>
+        <p className="text-3xl font-semibold text-center">Admin Dashboard</p>
       </nav>
       <div className="flex-1 mt-10 p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {AdminOptions.map((option, index) => (
