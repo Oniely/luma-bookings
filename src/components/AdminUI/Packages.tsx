@@ -1,63 +1,36 @@
 "use client";
 
 import React, { useState } from "react";
+import { Package } from "@/lib/types";
 
-// Mock Data
-const mockData = [
-  {
-    title: "Package 1",
-    package_description: "this is package 1",
-    Prices: "900",
-    Dates: "05/11/2022",
-    package_id: "qsw4523eds2wefw",
-    dateAdded: "05/11/2022 4:40 PM (PST)",
-  },
-
-  {
-    title: "Package 2",
-    package_description: "this is package 2",
-    Prices: "1900",
-    Dates: "05/12/2022",
-    package_id: "qsw4523eds2wefw1",
-    dateAdded: "05/12/2022 4:40 PM (PST)",
-  },
-
-  {
-    title: "Package 3",
-    package_description: "this is package 2",
-    Prices: "1900",
-    Dates: "05/12/2022",
-    package_id: "qsw4523eds2wefw2",
-    dateAdded: "05/13/2022 4:40 PM (PST)",
-  },
-];
-
-const Packages = () => {
+const Packages = ({packageData} : {packageData: Package[]}) => {
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(mockData);
+  const [data, setData] = useState(packageData);
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newPrices, setNewPrices] = useState("");
-  const [newDates, setNewDates] = useState("");
+  const [newRoom, setNewRoom] = useState("");
 
 const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setSearch(e.target.value);
-  const filteredData = mockData.filter((item) => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
+  const filteredData = packageData.filter((item) => item.package_name.toLowerCase().includes(e.target.value.toLowerCase()));
   setData(filteredData);
 };
 
 const handleAdd = () => {
-  const newId = Math.random().toString(36).substr(2, 9);
-  const newData = [...data, { id: newId, title: newTitle, description: newDescription, Prices: newPrices, Dates: newDates, dateAdded: new Date().toLocaleString() }];
+  const newId = () => {
+    "";
+  };
+  const newData = [...data, { package_id: newId, package_name: newTitle, package_description: newDescription, package_price: newPrices, room_id: newRoom}];
   setData(newData);
   setModalOpen(false);
   setNewTitle("");
 };
 
-const handleDelete = (id: string) => {
-  const filteredData = mockData.filter((item) => item.id !== id);
+const handleDelete = (package_id: string) => {
+  const filteredData = packageData.filter((item) => item.package_id !== package_id);
   setData(filteredData);
 };
 
@@ -75,25 +48,25 @@ return (
       </div>
       <div style={styles.table}>
         {data.map((item) => (
-          <div key={item.id} style={styles.row}>
+          <div key={item.package_id} style={styles.row}>
             <div style={styles.details}>
-              <h3 style={styles.title}>{item.title}</h3>
+              <h3 style={styles.title}>{item.package_name}</h3>
               <p style={styles.description}>{item.package_description}</p>
-              <p style={styles.description}>Price: {item.Prices}</p>
-              <p style={styles.description}>Dates: {item.Dates}</p>
+              <p style={styles.description}>Price: {item.package_price}</p>
             </div>
 
             <div style={styles.info}>
-              <p style={styles.description}>ID: <span>{item.id}</span></p>
-              <p style={styles.description}>Date Added: {item.dateAdded}</p>
+              <p style={styles.description}>Package ID: {item.package_id}</p>
+              <p style={styles.description}>Room ID: {item.room_id}</p>
+              <p style={styles.description}>Event ID: {item.event_id}</p>
             </div>
 
             <div style={styles.actions}>
-              <button style={styles.menuButton} onClick={() => setMenuOpen(menuOpen === item.id ? null : item.id)}>⋮</button>
-              {menuOpen === item.id && (
+              <button style={styles.menuButton} onClick={() => setMenuOpen(menuOpen === item.package_id ? null : item.package_id)}>⋮</button>
+              {menuOpen === item.package_id && (
                 <div style={styles.dropdown}>
-                  <div style={styles.dropdownItem} onClick={() => console.log("Edit", item.id)}>Edit</div>
-                  <div style={styles.dropdownItem} onClick={() => handleDelete(item.id)}>Delete</div>
+                  <div style={styles.dropdownItem} onClick={() => console.log("Edit", item.package_id)}>Edit</div>
+                  <div style={styles.dropdownItem} onClick={() => handleDelete(item.package_id)}>Delete</div>
                 </div>
               )}
             </div>
@@ -112,7 +85,7 @@ return (
 
             <input style={styles.modalInput} type="text" value={newPrices} onChange={(e) => setNewPrices(e.target.value)} placeholder="Prices" />
 
-            <input style={styles.modalInput} type="text" value={newDates} onChange={(e) => setNewDates(e.target.value)} placeholder="Dates" />
+            <input style={styles.modalInput} type="text" value={newRoom} onChange={(e) => setNewRoom(e.target.value)} placeholder="Room" />
 
             <button style={styles.modalAddButton} onClick={handleAdd}>Add</button>
             <button style={styles.modalCancelButton} onClick={() => setModalOpen(false)}>Cancel</button>
@@ -186,9 +159,9 @@ const styles = {
     display: "flex", 
     flexDirection: "column", 
     alignItems: "flex-start", 
-    textAlign: "left",
+    justifyContent: "center",
+    textAlign: "center",
     paddingRight: "50px",
-    paddingTop: "50px",
   },
 
   actions: { 

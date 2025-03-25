@@ -115,6 +115,7 @@ return (
           onChange={handleSearchChange}
           style={styles.searchInput}
         />
+        
         <select
           value={nameFilter}
           onChange={() => {}}

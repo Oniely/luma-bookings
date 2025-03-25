@@ -1,40 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { Event } from "@/lib/types";
 
-// Mock Data
-const mockData = [
-  {
-    title: "Event 1",
-    description: "this is event 1",
-    price: "900",
-    dates: "05/11/2022",
-    id: "qsw4523eds2wefw",
-    dateAdded: "05/11/2022 4:40 PM (PST)",
-  },
-
-  {
-    title: "Event 2",
-    description: "this is event 2",
-    price: "1900",
-    dates: "05/21/2022",
-    id: "qsw4523eds2wefp",
-    dateAdded: "05/12/2022 4:40 PM (PST)",
-  },
-
-  {
-    title: "Event 3",
-    description: "this is event 3",
-    price: "2900",
-    dates: "05/09/2022",
-    id: "qsw4523eds2wefw2",
-    dateAdded: "05/13/2022 4:40 PM (PST)",
-  },
-];
-
-const Events = () => {
+const Events = ({eventData} : {eventData: Event[]}) => {
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(mockData);
+  const [data, setData] = useState(eventData);
   const [menuOpen, setMenuOpen] = useState<string | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
@@ -44,7 +15,7 @@ const Events = () => {
 
 const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   setSearch(e.target.value);
-  const filteredData = mockData.filter((item) => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
+  const filteredData = eventData.filter((event) => event.event_name.toLowerCase().includes(e.target.value.toLowerCase()));
   setData(filteredData);
 };
 
@@ -56,8 +27,8 @@ const handleAdd = () => {
   setNewTitle("");
 };
 
-const handleDelete = (id: string) => {
-  const filteredData = mockData.filter((item) => item.id !== id);
+const handleDelete = (event_id: string) => {
+  const filteredData = eventData.filter((event) => event.event_id !== event_id);
   setData(filteredData);
 };
 
@@ -76,28 +47,27 @@ return (
 
       {/* tables */}
       <div style={styles.table}>
-        {data.map((item) => (
-        // list of items
-          <div key={item.id} style={styles.row}>
+        {data.map((event) => (
+        // list of events
+          <div key={event.event_id} style={styles.row}>
             <div style={styles.details}>
-              <h3 style={styles.title}>{item.title}</h3>
-              <p style={styles.description}><span>{item.description}</span></p>
-              <p style={styles.description}>Dates: <span>{item.dates}</span></p>
-              <p style={styles.description}>Price: <span>{item.price}</span></p>
+              <h3 style={styles.title}>{event.event_name}</h3>
+              <p style={styles.description}><span>{event.event_description}</span></p>
+              <p style={styles.description}>Dates: <span>{event.event_dates}</span></p>
+              <p style={styles.description}>Price: <span>{event.event_price}</span></p>
             </div>
 
             <div style={styles.info}>
-              <p style={styles.description}>ID: {item.id}</p>
-              <p style={styles.description}>Date Added: {item.dateAdded}</p>
+              <p style={styles.description}>Event ID: {event.event_id}</p>
             </div>
             
             {/* action button */}
             <div style={styles.actions}>
-              <button style={styles.menuButton} onClick={() => setMenuOpen(menuOpen === item.id ? null : item.id)}>⋮</button>
-              {menuOpen === item.id && (
+              <button style={styles.menuButton} onClick={() => setMenuOpen(menuOpen === event.event_id ? null : event.event_id)}>⋮</button>
+              {menuOpen === event.event_id && (
                 <div style={styles.dropdown}>
-                  <div style={styles.dropdownItem} onClick={() => console.log("Edit", item.id)}>Edit</div>
-                  <div style={styles.dropdownItem} onClick={() => handleDelete(item.id)}>Delete</div>
+                  <div style={styles.dropdownItem} onClick={() => console.log("Edit", event.event_id)}>Edit</div>
+                  <div style={styles.dropdownItem} onClick={() => handleDelete(event.event_id)}>Delete</div>
                 </div>
               )}
             </div>
@@ -189,9 +159,9 @@ const styles = {
     display: "flex", 
     flexDirection: "column", 
     alignItems: "flex-start", 
-    textAlign: "left",
+    justifyContent: "center",
+    textAlign: "center",
     paddingRight: "50px",
-    paddingTop: "50px",
   },
 
   actions: { 

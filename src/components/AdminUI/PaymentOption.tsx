@@ -78,14 +78,15 @@ const PaymentOption = () => {
     )}
 </div>
 );
-
 };
+
+export default PaymentOption;
 
 const styles = {
   container: { 
     display: "flex", 
     padding: "20px",
-    
+    width: "100%",
   },
 
   table: { 
@@ -217,5 +218,3 @@ const styles = {
     cursor: "pointer",
   },
 };
-
-export default PaymentOption;
