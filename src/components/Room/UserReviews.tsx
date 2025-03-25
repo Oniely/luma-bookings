@@ -1,6 +1,10 @@
 import { Dot, Star } from "lucide-react";
+import { getReviews } from "@/lib/action/reviews";
+
 
 const UserReviews = () => {
+
+
 	return (
 		<div className="flex flex-col gap-4 mt-2">
 			<div className="flex items-center leading-8">
@@ -17,6 +21,7 @@ const UserReviews = () => {
 				</button>
 			</div>
 			<div>Add reviews UI here...</div>
+			
 		</div>
 	);
 };
