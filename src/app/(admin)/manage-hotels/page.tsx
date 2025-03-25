@@ -2,8 +2,6 @@ import ManageHotels from "@/components/AdminUI/ManageHotels";
 import { getAllRooms } from "@/lib/action/rooms";
 import { Suspense, use } from "react";
 
-
-
 const manageHotels = () => {
   const { data, error } = use(getAllRooms());
   

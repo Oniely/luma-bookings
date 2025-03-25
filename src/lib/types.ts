@@ -75,5 +75,5 @@ export interface Event {
 	event_id: string;
 	event_description: string;
 	event_price: number;
-	event_date: string;
+	event_date: string[];
 }

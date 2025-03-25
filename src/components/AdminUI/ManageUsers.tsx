@@ -12,23 +12,23 @@ type Users = {
   email?: string;
 };
 
-const generateUsers = () => {
-  const users: Users[] = [];
-  const statuses = ["Intéressé", "Demande contact", "Attente de visite"];
-  for (let i = 0; i < 10; i++) {
-    const firstName = faker.person.firstName();
-    const lastName = faker.person.lastName();
-    const user: Users = {
-      uid: faker.string.uuid(),
-      name: `${firstName} ${lastName}`,
-      address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.state()} ${faker.address.zipCode()} ${faker.address.country()}`,
-      phone: faker.phone.number(),
-      email: `${firstName.toLowerCase()}${lastName.toLowerCase()}@gmail.com`,
-    };
-    users.push(user);
-  }
-  return users;
-};
+// const generateUsers = () => {
+//   const users: Users[] = [];
+//   const statuses = ["Intéressé", "Demande contact", "Attente de visite"];
+//   for (let i = 0; i < 10; i++) {
+//     const firstName = faker.person.firstName();
+//     const lastName = faker.person.lastName();
+//     const user: Users = {
+//       uid: faker.string.uuid(),
+//       name: `${firstName} ${lastName}`,
+//       address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.state()} ${faker.address.zipCode()} ${faker.address.country()}`,
+//       phone: faker.phone.number(),
+//       email: `${firstName.toLowerCase()}${lastName.toLowerCase()}@gmail.com`,
+//     };
+//     users.push(user);
+//   }
+//   return users;
+// };
 
 const ManageUsers: React.FC = () => {
   const [users, setUsers] = useState<Users[]>(generateUsers());

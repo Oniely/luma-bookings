@@ -58,53 +58,39 @@ const ManageHotels = ({roomData}: {roomData: Room[]}) => {
   const [dateAddedFilter, setDateAddedFilter] = useState("");
   const [priceFilter, setPriceFilter] = useState("");
 
-// const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//   setSearch(e.target.value);
-//   const filteredData = mockData.filter((item) => item.title.toLowerCase().includes(e.target.value.toLowerCase()));
-//   setData(filteredData);
-// };
+const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setSearch(e.target.value);
+  const filteredData = roomData.filter((item) => item.room_name.toLowerCase().includes(e.target.value.toLowerCase()));
+  setData(filteredData);
+};
 
-// const handleNameFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-//   setNameFilter(e.target.value);
-//   const filteredData = mockData.sort((a, b) => {
-//     if (e.target.value === "asc") {
-//       return a.title.localeCompare(b.title);
-//     } else if (e.target.value === "desc") {
-//       return b.title.localeCompare(a.title);
-//     } else {
-//       return 0;
-//     }
-//   });
-//   setData(filteredData);
-// };
+const handleNameFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  setNameFilter(e.target.value);
+  const filteredData = roomData.sort((a, b) => {
+    if (e.target.value === "asc") {
+      return a.room_name.localeCompare(b.room_name);
+    } else if (e.target.value === "desc") {
+      return b.room_name.localeCompare(a.room_name);
+    } else {
+      return 0;
+    }
+  });
+  setData(filteredData);
+};
 
-// const handleDateAddedFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-//     setDateAddedFilter(e.target.value);
-//     const filteredData = mockData.sort((a, b) => {
-//       if (e.target.value === "asc") {
-//         return a.dateAdded.localeCompare(b.dateAdded);
-//       } else if (e.target.value === "desc") {
-//         return b.dateAdded.localeCompare(a.dateAdded);
-//       } else {
-//         return 0;
-//       }
-//     });
-//     setData(filteredData);
-//   };
-
-//   const handlePriceFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-//     setPriceFilter(e.target.value);
-//     const filteredData = mockData.sort((a, b) => {
-//       if (e.target.value === "asc") {
-//         return a.price.localeCompare(b.price);
-//       } else if (e.target.value === "desc") {
-//         return b.price.localeCompare(a.price);
-//       } else {
-//         return 0;
-//       }
-//     });
-//     setData(filteredData);
-//   };
+  // const handlePriceFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setPriceFilter(e.target.value);
+  //   const filteredData = roomData.sort((a, b) => {
+  //     if (e.target.value === "asc") {
+  //       return a.room_price.localeCompare(b.room_price);
+  //     } else if (e.target.value === "desc") {
+  //       return b.price.localeCompare(a.price);
+  //     } else {
+  //       return 0;
+  //     }
+  //   });
+  //   setData(filteredData);
+  // };
 
 // const handleDelete = (id: string) => {
 //   const filteredData = mockData.filter((item) => item.id !== id);
@@ -126,7 +112,7 @@ return (
           type="text"
           placeholder="Search properties"
           value={search}
-          onChange={() => {}}
+          onChange={handleSearchChange}
           style={styles.searchInput}
         />
         <select
