@@ -1,59 +1,16 @@
-"use client";
-
-import React, { useState } from "react";
-import Events from "@/components/AdminUI/Events";
-import Packages from "@/components/AdminUI/Packages";
 import PaymentOption from "@/components/AdminUI/PaymentOption";
 
-const otherSettings = () => {
-    const [activeMenu, setActiveMenu] = useState("events");
-  
-    const handleMenuClick = (menu: string) => {
-      setActiveMenu(menu);
-    };
+export default function Page() {
 
   return (
     <div style={styles.container}>
-      <div style={styles.sidebar}>
-        <ul style={styles.menu}>
-          <li style={styles.menuItem} onClick={() => handleMenuClick("events")}>
-            Events
-          </li>
-          <li style={styles.menuItem} onClick={() => handleMenuClick("packages")}>
-            Packages
-          </li>
-          <li
-            style={styles.menuItem}
-            onClick={() => handleMenuClick("paymentOptions")}
-          >
-            Payment Options
-          </li>
-        </ul>
-        </div>
-        
-        {activeMenu === "events" && (
           <div style={styles.content}>
-            <Events/>
+            <PaymentOption/>
           </div>
-        )}
-
-        {activeMenu === "packages" && (
-          <div style={styles.content}>
-            <Packages/>
-          </div>
-        )}
-
-        {activeMenu === "paymentOptions" && (
-          <div style={styles.content}>
-            <PaymentOption />
-          </div>
-        )}
-
     </div>
   );
 };
 
-export default otherSettings;
 
 const styles = {
     container: { 
