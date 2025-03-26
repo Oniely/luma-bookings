@@ -53,7 +53,7 @@ export interface Employee {
 	fullName: string;
 	password: string;
 	employee_role: string;
-	profile_url: string[];
+	profile_url: string;
 }
 
 export interface Review {
