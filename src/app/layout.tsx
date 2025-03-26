@@ -22,7 +22,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en" className="scroll-smooth">
-			<body className={`${poppinsFont.variable} antialiased`}>
+			<body
+				className={`${poppinsFont.variable} antialiased overflow-x-hidden`}
+			>
 				{children}
 				<Toaster />
 			</body>

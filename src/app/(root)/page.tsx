@@ -1,46 +1,51 @@
-import RoomCard from "@/components/Cards/RoomCard";
 import Hero from "@/components/Home/Hero";
+import RoomList from "@/components/Home/RoomList";
+import Showcase from "@/components/Home/Showcase";
 import RoomCardsSkeleton from "@/components/Room/RoomCardSkeleton";
+import { Separator } from "@/components/ui/separator";
 import { getAllRooms } from "@/lib/action/rooms";
-import { Room } from "@/lib/types";
-import { Suspense, use } from "react";
+import { Suspense } from "react";
 
-function RoomsList() {
-	const { data, error } = use(getAllRooms());
+const RoomsContent = async () => {
+	const { data, error } = await getAllRooms();
 
 	if (error) {
 		return (
-			<p className="text-red-500">
+			<p className="py-8 text-red-500 padding-container max-container">
 				Error loading rooms: {error.toString()}
 			</p>
 		);
 	}
 
 	if (!data || data.length === 0) {
-		return <p>No rooms available at the moment.</p>;
+		return (
+			<p className="py-8 padding-container max-container">
+				No rooms available at the moment.
+			</p>
+		);
 	}
 
-	return (
-		<div className="grid grid-cols-2 py-6 gap-x-6 gap-y-8 md:grid-cols-3 lg:grid-cols-4">
-			{data.map((room: Room) => (
-				<RoomCard key={room.room_id} room={room} />
-			))}
-		</div>
-	);
-}
+	return <RoomList rooms={data} />;
+};
 
 export default async function Home() {
 	return (
 		<>
 			<Hero />
-			<section className="relative py-8 padding-container max-container min-h-dvh">
-				<h1 className="text-3xl font-medium font-canela">
-					Available Rooms
-				</h1>
-				<Suspense fallback={<RoomCardsSkeleton />}>
-					<RoomsList />
-				</Suspense>
-			</section>
+			<Showcase />
+			<Separator />
+			<Suspense
+				fallback={
+					<div className="pb-8 padding-container max-container page-space">
+						<h1 className="text-3xl font-medium font-canelad">
+							Loading Rooms...
+						</h1>
+						<RoomCardsSkeleton />
+					</div>
+				}
+			>
+				<RoomsContent />
+			</Suspense>
 		</>
 	);
 }

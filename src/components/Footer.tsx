@@ -5,12 +5,12 @@ import { ReactNode } from "react";
 
 const Footer = () => {
 	return (
-		<footer className="py-20 flexCenter bg-black-100">
-			<div className="flex flex-col w-full padding-container max-container gap-14">
+		<footer className="pt-20 pb-12 flexCenter border-t relative">
+			<div className="flex flex-col w-full padding-container max-container gap-14 relative">
 				<div className="flex flex-col items-start justify-center gap-[10%] md:flex-row">
 					<Link href={"/"} className="mb-10">
 						<Image
-							src="/images/logo-light.png"
+							src="/images/logo-dark.png"
 							alt="logo"
 							width={1000}
 							height={1000}
@@ -18,7 +18,7 @@ const Footer = () => {
 						/>
 					</Link>
 
-					<div className="flex flex-wrap gap-10 sm:justify-between md:flex-1">
+					<div className="flex flex-wrap gap-10 md:justify-between md:flex-1">
 						{FOOTER_LINKS.map((columns) => (
 							<FooterColumn
 								title={columns.title}
@@ -29,7 +29,7 @@ const Footer = () => {
 										<Link
 											href={link.url}
 											key={link.label}
-											className="hover:underline hover:text-secondary-100"
+											className="hover:underline hover:text-black-100"
 										>
 											{link.label}
 										</Link>
@@ -62,7 +62,7 @@ const Footer = () => {
 								<ul className="flex gap-4 text-gray-500 regular-14">
 									{SOCIALS.links.map((link, i) => (
 										<Link href={link.url} key={i}>
-											<link.icon className="text-secondary hover:text-secondary-100" />
+											<link.icon className="text-secondary hover:text-black-100" />
 										</Link>
 									))}
 								</ul>
@@ -73,10 +73,12 @@ const Footer = () => {
 
 				<div className="border bg-secondary h-[1px]" />
 
-				<p className="w-full text-center regular-14 text-secondary-100">
+				<p className="w-full text-center regular-14 text-secondary">
 					&copy; 2025 Luma | All rights reserved
 				</p>
 			</div>
+			<div className="size-[25rem] bg-secondary absolute -bottom-20 -left-20 -z-10 rounded-full blur-[180px]" />
+			<div className="size-[25rem] bg-secondary absolute top-30 -right-20 -z-10 rounded-full blur-[180px]" />
 		</footer>
 	);
 };
@@ -89,7 +91,9 @@ type FooterColumnProps = {
 const FooterColumn = ({ title, children }: FooterColumnProps) => {
 	return (
 		<div className="flex flex-col gap-5">
-			<h4 className="text-white bold-18 whitespace-nowrap">{title}</h4>
+			<h4 className="text-black-100 bold-18 whitespace-nowrap">
+				{title}
+			</h4>
 			{children}
 		</div>
 	);
