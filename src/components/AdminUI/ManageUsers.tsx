@@ -72,25 +72,8 @@ const styles = {
         padding: "10px",
         backgroundColor: "#F8F9FA",
         flexShrink: 0,
-        overflowY: "auto",
+        overflowY: "auto" as React.CSSProperties["overflowY"],
         maxHeight: "100vh",
-        [`@media (max-width: 768px)`]: {
-          width: "100%",
-          borderRight: "none",
-          padding: "10px 0",
-        },
-        [`@media (max-width: 480px)`]: {
-          padding: "5px",
-        },
-        [`@media (text-size-adjust: 200%)`]: { // add this to make the sidebar responsive to text size adjustments
-          fontSize: "16px",
-        },
-        [`@media (text-size-adjust: 300%)`]: {
-          fontSize: "20px",
-        },
-        [`@media (text-size-adjust: 400%)`]: {
-          fontSize: "24px",
-        },
       },
       
       candidateItem: {
@@ -177,12 +160,6 @@ const styles = {
     mainContent: { 
         flex: 1,
         padding: "20px",
-        overflowY: "auto", // add this to make the content scrollable
-        [`@media (max-width: 768px)`]: {
-        padding: "10px",
-        },
-        [`@media (max-width: 480px)`]: {
-        padding: "5px",
-        },
+        overflowY: "auto" as React.CSSProperties["overflowY"], // add this to make the content scrollable
     },
 };

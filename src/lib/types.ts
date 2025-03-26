@@ -73,9 +73,10 @@ export interface Review {
 
 export interface Event {
 	event_id: string;
+	event_name: string;
 	event_description: string;
 	event_price: number;
-	event_date: string[];
+	event_dates: string[];
 }
 
 export interface UserData {

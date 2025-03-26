@@ -21,7 +21,7 @@ const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 const handleAdd = () => {
   const newId = Math.random().toString(36).substr(2, 9);
-  const newData = [...data, { id: newId, title: newTitle, dateAdded: new Date().toLocaleString() }];
+  const newData = [...data, { event_id: newId, event_name: newTitle, event_description: newDescription, event_price: Number(newPrices), event_dates: [newDates] }];
   setData(newData);
   setModalOpen(false);
   setNewTitle("");
@@ -101,7 +101,7 @@ return (
 
 export default Events;
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   container: { 
     display: "flex", 
     padding: "20px",

@@ -163,7 +163,7 @@ return (
 
       </div>
 
-      <div style={styles.table}>
+      <div style={styles.table as React.CSSProperties}>
         {data.map((item) => (
           <AdminRoomCard key={item.room_id} room_id={item.room_id}
            room_name={item.room_name}

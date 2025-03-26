@@ -50,7 +50,7 @@ const styles = {
         height: "100px",
         borderRadius: "4px",
         marginRight: "10px",
-        objectFit: "cover",
+        objectFit: "cover" as React.CSSProperties['objectFit'],
       },
       details: {
         flex: 1,

@@ -15,7 +15,7 @@ export default function AdminUser ({user, selected, onClick}: {user: UserData, s
       }}
     >
       <div style={styles.userAvatar}>{user.fullName.charAt(0)}</div>
-      <div style={styles.userInfo}>
+      <div style={styles.userInfo as React.CSSProperties}>
         <div style={styles.userName}>{user.fullName}</div>
       </div>
     </div>

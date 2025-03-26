@@ -2,7 +2,7 @@ import ManageUsers from "@/components/AdminUI/ManageUsers";
 import { getAllUsers } from "@/lib/action/user";
 import { use } from "react";
 
-const manageUsers = () => {
+const Page = () => {
   const { data, error } = use(getAllUsers());
   
     if (error) {
@@ -20,4 +20,4 @@ const manageUsers = () => {
   return <ManageUsers userData={data} />;
 };
 
-export default manageUsers;
+export default Page;

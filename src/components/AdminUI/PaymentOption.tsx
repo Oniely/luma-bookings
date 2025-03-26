@@ -44,19 +44,19 @@ const PaymentOption = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.table}>
+      <div style={styles.table as React.CSSProperties}>
          {data.map((item) => (
-          <div key={item.id} style={styles.row}>
+          <div key={item.id} style={styles.row as React.CSSProperties}>
             <div style={styles.details}>
               <h3 style={styles.title}>{item.title}</h3>
               <p style={styles.description}>ID: <span>{item.id}</span></p>
               <p style={styles.description}>Date Added: {item.dateAdded}</p>
             </div>
 
-            <div style={styles.actions}>
+            <div style={styles.actions as React.CSSProperties}>
               <button style={styles.menuButton} onClick={() => setMenuOpen(menuOpen === item.id ? null : item.id)}>⋮</button>
               {menuOpen === item.id && (
-                <div style={styles.dropdown}>
+                <div style={styles.dropdown as React.CSSProperties}>
                   <div style={styles.dropdownItem} onClick={() => console.log("Edit", item.id)}>Edit</div>
                   <div style={styles.dropdownItem} onClick={() => handleDelete(item.id)}>Delete</div>
                 </div>
@@ -65,9 +65,9 @@ const PaymentOption = () => {
           </div>
         ))}
       </div>
-      <button style={styles.addButton} onClick={() => setModalOpen(true)}>+</button>
+      <button style={styles.addButton as React.CSSProperties} onClick={() => setModalOpen(true)}>+</button>
       {modalOpen && (
-        <div style={styles.modal}>
+        <div style={styles.modal as React.CSSProperties}>
             <div style={styles.modalContent}>
             <h2 style={styles.modalTitle}>Add Payment Option</h2>
             <input style={styles.modalInput} type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)} placeholder="Title" />

@@ -20,10 +20,8 @@ const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 const handleAdd = () => {
-  const newId = () => {
-    "";
-  };
-  const newData = [...data, { package_id: newId, package_name: newTitle, package_description: newDescription, package_price: newPrices, room_id: newRoom}];
+  const newId = Date.now().toString();
+  const newData = [...data, { package_id: newId, package_name: newTitle, package_description: newDescription, package_price: Number(newPrices), room_id: newRoom, event_id: "" }];
   setData(newData);
   setModalOpen(false);
   setNewTitle("");
@@ -100,7 +98,7 @@ return (
 
 export default Packages;
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
   container: { 
     display: "flex", 
     padding: "20px",

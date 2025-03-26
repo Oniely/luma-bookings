@@ -2,7 +2,7 @@ import ManageHotels from "@/components/AdminUI/ManageHotels";
 import { getAllRooms } from "@/lib/action/rooms";
 import { Suspense, use } from "react";
 
-const manageHotels = () => {
+const Page = () => {
   const { data, error } = use(getAllRooms());
   
     if (error) {
@@ -22,4 +22,4 @@ const manageHotels = () => {
 );
 };
 
-export default manageHotels;
+export default Page;
