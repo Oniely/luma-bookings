@@ -37,6 +37,7 @@ export interface Transaction {
 	reservation_total_payment_amount: number;
 	reservation_payment_type: string;
 	reservation_description: string;
+	reservation_status: string;
 }
 
 export interface Package {

@@ -6,7 +6,7 @@ const Searchbar = () => {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
-				<button className="mr-2 hover:bg-transparent hover:text-black-100 flexCenter size-10 cursor-pointer">
+				<button className="mr-2 hover:bg-transparent hover:text-white flexCenter size-10 cursor-pointer">
 					<Search className="size-6" />
 				</button>
 			</PopoverTrigger>

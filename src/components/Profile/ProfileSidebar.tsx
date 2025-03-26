@@ -3,7 +3,6 @@ import { BookKey, Home, LogOut, Settings } from "lucide-react";
 import {
 	Sidebar,
 	SidebarContent,
-	SidebarFooter,
 	SidebarGroup,
 	SidebarGroupContent,
 	SidebarGroupLabel,
@@ -49,7 +48,6 @@ export default function ProfileSidebar() {
 	return (
 		<Sidebar>
 			<SidebarContent className="pt-20 bg-beige">
-				<Separator className="bg-black-100 absolute top-15" />
 				<SidebarHeader>
 					<Link
 						href="/"

@@ -1,4 +1,5 @@
 import { auth } from "@/app/auth";
+import ReservationsTabs from "@/components/Profile/ReservationsTabs";
 import { redirect } from "next/navigation";
 
 const page = async () => {
@@ -7,7 +8,7 @@ const page = async () => {
 	if (!session) redirect("/login");
 
 	return (
-		<section className="pt-6 pb-10 h-dvh md:pb-14">
+		<section className="pt-6 pb-10 min-h-dvh md:pb-14">
 			<div className="pt-[4rem] padding-container flex flex-col gap-7 relative overflow-hidden">
 				<div className="text-[#505050]">
 					<p className="text-sm uppercase">
@@ -18,7 +19,7 @@ const page = async () => {
 					</h1>
 				</div>
 				<div className="flex items-start justify-center md:justify-start">
-					{/* value */}
+					<ReservationsTabs />
 				</div>
 			</div>
 		</section>
