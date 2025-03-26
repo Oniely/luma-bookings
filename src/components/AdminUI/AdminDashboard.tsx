@@ -8,8 +8,6 @@ const AdminOptions = [
 
     { icon: Bed, title: "Manage Hotels", description: "Manage all the hotels and details", path: "/manage-hotels" },
 
-    { icon: Activity, title: "Manage Amenities", description: "Manage all the services of the hotels can offer", path: "/manage-amenities" },
-
     { icon: Settings, title: "Other Settings", description: "Manage Payments Options, Packages, and Events", path: "/other-settings" },
   ];
   
@@ -27,22 +25,22 @@ const AdminOptions = [
     );
   };
   
-  const getIconColor = (icon) => {
-    switch (icon) {
-      case User:
-        return "text-blue-500";
-      case Shield:
-        return "text-red-500";
-      case Bed:
-        return "text-yellow-500";
-      case Activity:
-        return "text-purple-500";
-      case Settings:
-        return "text-gray-500";
-      default:
-        return "text-black";
-    }
-  };
+  const getIconColor = (icon: React.ElementType) => {
+      switch (icon) {
+        case User:
+          return "text-blue-500";
+        case Shield:
+          return "text-red-500";
+        case Bed:
+          return "text-yellow-500";
+        case Activity:
+          return "text-purple-500";
+        case Settings:
+          return "text-gray-500";
+        default:
+          return "text-black";
+      }
+    };
 
 export default function AdminDashboard() {
   return (
