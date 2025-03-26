@@ -1,28 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { faker } from "@faker-js/faker";
 import { UserData } from "@/lib/types";
 import AdminUser from "./AdminUser/AdminUser";
 import OneUser from "./AdminUser/OneUser";
-
-
-// const generateUsers = () => {
-//   const users: Users[] = [];
-//   for (let i = 0; i < 10; i++) {
-//     const firstName = faker.person.firstName();
-//     const lastName = faker.person.lastName();
-//     const user: Users = {
-//       uid: faker.string.uuid(),
-//       name: `${firstName} ${lastName}`,
-//       address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.state()} ${faker.address.zipCode()} ${faker.address.country()}`,
-//       phone: faker.phone.number(),
-//       email: `${firstName.toLowerCase()}${lastName.toLowerCase()}@gmail.com`,
-//     };
-//     users.push(user);
-//   }
-//   return users;
-// };
 
 const ManageUsers = ({userData}: {userData: UserData[]}) => {
   const [users, setUsers] = useState(userData);
