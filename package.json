@@ -9,7 +9,6 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@faker-js/faker": "^9.6.0",
 		"@radix-ui/react-alert-dialog": "^1.1.6",
 		"@radix-ui/react-dialog": "^1.1.6",
 		"@radix-ui/react-dropdown-menu": "^2.1.6",
@@ -38,7 +37,6 @@
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",
-		"@faker-js/faker": "^9.6.0",
 		"@tailwindcss/postcss": "^4",
 		"@types/node": "^20",
 		"@types/react": "^19",
