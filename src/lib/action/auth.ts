@@ -97,7 +97,7 @@ export async function register(data: {
 		const res = await axiosClient.post("/create_user", {
 			fullName: data.fname + " " + data.lname,
 			username: data.username,
-			// email: data.email,
+			email: data.email,
 			password: data.confirmPassword,
 			profile_url: data?.profile_url || "/images/default_profile.jpg",
 		});

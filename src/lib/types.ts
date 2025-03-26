@@ -54,7 +54,7 @@ export interface Employee {
 	fullName: string;
 	password: string;
 	employee_role: string;
-	profile_url: string[];
+	profile_url: string;
 }
 
 export interface Review {
@@ -74,7 +74,15 @@ export interface Review {
 
 export interface Event {
 	event_id: string;
+	event_name: string;
 	event_description: string;
 	event_price: number;
-	event_date: string;
+	event_dates: string[];
+}
+
+export interface UserData {
+	user_id: string;
+	fullName: string;
+	username: string;
+	profile_url: string;
 }
