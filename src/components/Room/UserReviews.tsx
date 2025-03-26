@@ -46,7 +46,6 @@ const styles = {
     scrollSnapAlign: "start", // Ensures each review snaps into place
     textWrap: "wrap",
     margin: "0 10px",
-    border: "1px solid #ccc",
   },
   reviewIconsSet: {
     display: "flex", 
