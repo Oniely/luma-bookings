@@ -1,11 +1,26 @@
 import { auth } from "@/app/auth";
 import ReservationsTabs from "@/components/Profile/ReservationsTabs";
+import { getUserReservations } from "@/lib/action/userreservations";
 import { redirect } from "next/navigation";
 
 const page = async () => {
 	const session = await auth();
 
-	if (!session) redirect("/login");
+	if (!session) redirect("/login");	
+
+	const { data, error } = await getUserReservations();
+
+	if (error) {
+		return (
+			<p className="text-red-500">
+				Error loading rooms: {error.toString()}
+			</p>
+		);
+	}
+
+	if (!data || data.length === 0) {
+		return <p>No reservations currently</p>;
+	}
 
 	return (
 		<section className="pt-6 pb-10 min-h-dvh md:pb-14">
@@ -19,7 +34,7 @@ const page = async () => {
 					</h1>
 				</div>
 				<div className="flex items-start justify-center md:justify-start">
-					<ReservationsTabs />
+					<ReservationsTabs reservations={data} />
 				</div>
 			</div>
 		</section>
