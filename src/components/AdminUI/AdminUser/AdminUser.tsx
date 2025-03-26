@@ -1,16 +1,16 @@
 import { UserData } from "@/lib/types";
 
-export default function AdminUser ({user}: {user: UserData}) {
+export default function AdminUser ({user, selected, onClick}: {user: UserData, selected: string, onClick: () => void}) {
     return (
     <div
       key={user.user_id}
-      className={`sidebar-item ${user?.user_id === user.user_id ? "selected" : ""}`}
-      onClick={() => {}}
+      className={`sidebar-item ${selected === user.user_id ? "selected" : ""}`}
+      onClick={onClick}
       style={{
         ...styles.candidateItem,
-        border: user?.user_id === user.user_id ? "2px solid #007bff" : "1px solid #ccc",
+        border: selected === user.user_id ? "2px solid #007bff" : "1px solid #ccc",
         boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)",
-        backgroundColor: user?.user_id === user.user_id ? "#e0e0e0" : "white",
+        backgroundColor: selected === user.user_id ? "#e0e0e0" : "white",
         margin: "10px 0",
       }}
     >

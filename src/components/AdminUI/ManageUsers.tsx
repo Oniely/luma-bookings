@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { faker } from "@faker-js/faker";
 import { UserData } from "@/lib/types";
 import AdminUser from "./AdminUser/AdminUser";
+import OneUser from "./AdminUser/OneUser";
 
 
 // const generateUsers = () => {
@@ -25,16 +26,18 @@ import AdminUser from "./AdminUser/AdminUser";
 
 const ManageUsers = ({userData}: {userData: UserData[]}) => {
   const [users, setUsers] = useState(userData);
+  const [selectedUser, setSelectedUser] = useState<UserData>(users[0]);
 
   return (
     <div>
       <div style={styles.container}>
         <div style={styles.sidebar}>
           <div style={{ height: "100%", overflowY: "auto" }}>
-            {users.map((user) => <AdminUser user={user}/> )}
+            {users.map((user) => <AdminUser onClick={() => setSelectedUser(user)} key={user.user_id} user={user} selected={selectedUser?.user_id}/> )}
           </div>
         </div>
         <div style={styles.mainContent}>
+          <OneUser selectedUser={selectedUser} />
         </div>
       </div>
     </div>
