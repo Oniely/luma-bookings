@@ -57,18 +57,19 @@ export interface Employee {
 }
 
 export interface Review {
+	fullName: string;
 	review_id: string;
 	user_id: string;
 	room_id: string;
 	review_rating: number;
-	review_is_accomodating: boolean;
-	review_has_helpful_staff: boolean;
-	review_is_clean: boolean;
-	review_is_comfortable: boolean;
-	review_is_value_for_money: boolean;
-	review_is_quiet: boolean;
-	review_is_spacious: boolean;
-	review_text: string;
+	review_is_accomodating?: boolean;
+	review_has_helpful_staff?: boolean;
+	review_is_clean?: boolean;
+	review_is_comfortable?: boolean;
+	review_is_value_for_money?: boolean;
+	review_is_quiet?: boolean;
+	review_is_spacious?: boolean;
+	review_text?: string;
 }
 
 export interface Event {

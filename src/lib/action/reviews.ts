@@ -3,18 +3,18 @@
 import axiosClient from "../axios";
 import { tryCatch } from "../try-catch";
 
-export async function getReviews() {
-    const { data, error } = await tryCatch(axiosClient.get("/create_review"));
+export async function getReviews(roomId: string) {
+    const { data, error } = await tryCatch(axiosClient.get(`/reviews/room/${roomId}`));
 
     if (error) return { error: "Cannot get reviews" };
 
     return { data: data.data.data, error };
 }
 
-export async function getReview(id: string) {
-    const { data, error } = await tryCatch(axiosClient.get(`/create_review/${id}`));
+export async function postReview(id: string) {
+    const { data, error } = await tryCatch(axiosClient.post(`/review/${id}`));
 
-    if (error) return { error: "Cannot get reviews" };
+    if (error) return { error: "Cannot post reviews" };
 
     return { data: data.data.data, error };
 }
