@@ -77,3 +77,10 @@ export interface Event {
 	event_price: number;
 	event_date: string[];
 }
+
+export interface UserData {
+	user_id: string;
+	fullName: string;
+	username: string;
+	profile_url: string;
+}
