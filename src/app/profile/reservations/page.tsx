@@ -3,6 +3,7 @@ import ReservationsTabs from "@/components/Profile/ReservationsTabs";
 import { getUserReservations } from "@/lib/action/userreservations";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import Script from 'next/script';
 
 // Create a loading component
 const ReservationsLoading = () => (
@@ -39,6 +40,9 @@ const page = async () => {
 	if (!session) redirect("/login");
 
 	return (
+		<>
+		<Script src='//fw-cdn.com/12558907/4954538.js' strategy="afterInteractive" />
+
 		<section className="pt-6 pb-10 min-h-dvh md:pb-14">
 			<div className="pt-[4rem] padding-container flex flex-col gap-7 relative overflow-hidden">
 				<div className="text-[#505050]">
@@ -56,6 +60,7 @@ const page = async () => {
 				</div>
 			</div>
 		</section>
+		</>
 	);
 };
 
