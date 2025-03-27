@@ -113,8 +113,8 @@ export async function updateProfile(
 	data: {
 		fname: string;
 		lname: string;
-		username: string;
 		password?: string;
+		confirmPassword?: string;
 		profile_image?: File | null;
 	},
 	token: string
@@ -122,10 +122,13 @@ export async function updateProfile(
 	try {
 		const formData = new FormData();
 		formData.append("fullName", data.fname + " " + data.lname);
-		formData.append("username", data.username);
 
 		// Only append password if it exists and is not empty
-		if (data.password) {
+		if (
+			data.password &&
+			data.confirmPassword &&
+			data.password === data.confirmPassword
+		) {
 			formData.append("password", data.password);
 		}
 
@@ -138,17 +141,16 @@ export async function updateProfile(
 		await unstable_update({
 			user: {
 				fullName: data.fname + " " + data.lname,
-				username: data.username,
 			},
 		});
 
-		const res = await axiosClient.put("/update_user", formData, {
-			headers: {
-				"x-access-token": token,
-			},
-		});
+		// const res = await axiosClient.put("/update_user", formData, {
+		// 	headers: {
+		// 		"x-access-token": token,
+		// 	},
+		// });
 
-		return res.data;
+		// return res.data;
 	} catch (error) {
 		console.error(error);
 		throw error;

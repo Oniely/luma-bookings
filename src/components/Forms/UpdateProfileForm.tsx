@@ -17,8 +17,8 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 			? user.fullName.split(" ").slice(0, -1).join(" ")
 			: "",
 		lname: user.fullName ? user.fullName.split(" ").slice(-1)[0] : "",
-		username: user.username || "",
 		password: "",
+		confirmPassword: "",
 	});
 	const [profileImage, setProfileImage] = useState<File | null>(null);
 	const [previewImage, setPreviewImage] = useState<string>(user.profile_url);
@@ -53,8 +53,9 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 		const formValuesData = {
 			fname: formData.get("fname") as string,
 			lname: formData.get("lname") as string,
-			username: formData.get("username") as string,
 			password: (formData.get("password") as string) || undefined,
+			confirmPassword:
+				(formData.get("confirmPassword") as string) || undefined,
 			profile_image: profileImage || null,
 		};
 
@@ -76,8 +77,8 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 				{
 					fname: result.data.fname,
 					lname: result.data.lname,
-					username: result.data.username,
 					password: result.data.password || "",
+					confirmPassword: result.data.confirmPassword || "",
 					profile_image: result.data.profile_image || null,
 				},
 				token
@@ -123,7 +124,7 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 					<div>
 						<p>{user.fullName}</p>
 						<p className="text-sm font-light leading-none">
-							@{user.username}
+							@{user.fullName.split(" ")[0]}
 						</p>
 						<label
 							htmlFor="profile_image"
@@ -191,27 +192,6 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 			</div>
 			<div className="col-span-1">
 				<label
-					htmlFor="username"
-					className="text-sm font-medium flexBetween text-black-100"
-				>
-					Username
-					{errors.username && (
-						<span className="font-normal text-red-600">
-							{errors.username}
-						</span>
-					)}
-				</label>
-				<input
-					type="text"
-					name="username"
-					id="username"
-					value={formValues.username}
-					onChange={handleChange}
-					className="w-full px-2 py-2 border border-black-100"
-				/>
-			</div>
-			<div className="col-span-1">
-				<label
 					htmlFor="password"
 					className="text-sm font-medium flexBetween text-black-100"
 				>
@@ -227,6 +207,27 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 					name="password"
 					id="password"
 					value={formValues.password}
+					onChange={handleChange}
+					className="w-full px-2 py-2 border border-black-100"
+				/>
+			</div>
+			<div className="col-span-1">
+				<label
+					htmlFor="confirmPassword"
+					className="text-sm font-medium flexBetween text-black-100"
+				>
+					Confirm Password
+					{errors.confirmPassword && (
+						<span className="font-normal text-red-600">
+							{errors.confirmPassword}
+						</span>
+					)}
+				</label>
+				<input
+					type="password"
+					name="confirmPassword"
+					id="confirmPassword"
+					value={formValues.confirmPassword}
 					onChange={handleChange}
 					className="w-full px-2 py-2 border border-black-100"
 				/>
