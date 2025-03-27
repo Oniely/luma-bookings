@@ -23,7 +23,7 @@ export interface Room {
 	room_is_available?: boolean;
 	room_is_guest_favorite?: boolean;
 	room_perks?: PerkName[];
-	room_occupied_dates?: Date[];
+	room_occupied_dates?: string[];
 }
 
 export interface Transaction {

@@ -15,7 +15,7 @@ export async function getUserReservations() {
 		})
 	);
 
-	console.log((await auth())!.accessToken);
+	// console.log((await auth())!.accessToken);
 	if (error) return { error: `${error}` };
 
 	return { data: data.data.data, error };
@@ -50,7 +50,7 @@ export async function bookRoom(transaction: Transaction, token: string) {
 				reservation_description:
 					transaction.reservation_description ||
 					"I'd like to book this room",
-				reservation_status: "completed",
+				reservation_status: "pending",
 			},
 			{
 				headers: {

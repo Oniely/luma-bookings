@@ -22,13 +22,10 @@ const Page = async ({ params }: PageProps) => {
 
 	if (!room) notFound();
 
-	// const fetchReviews = async () => {
+	const { data: review, error } = await getReviews(id);
 
-	const { data: review, error }= await getReviews(id);
-	
 	if (!review) notFound();
-		
-	
+
 	return (
 		<div className="relative min-h-screen px-8 pb-8 text-white page-space bg-primary padding-container max-container">
 			<h1 className="mt-8 mb-3 text-3xl">{room.title}</h1>
@@ -39,7 +36,7 @@ const Page = async ({ params }: PageProps) => {
 			</div>
 			<Separator className="my-5" />
 			<div>
-				<UserReviews reviews={review}/>
+				<UserReviews reviews={review} />
 				{/* <UserReviews/> */}
 			</div>
 		</div>

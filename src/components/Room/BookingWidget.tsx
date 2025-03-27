@@ -151,7 +151,17 @@ const BookingWidget = ({ room, user }: Props) => {
 										months: "flex flex-col gap-6 w-full md:flex-row",
 									}}
 									initialFocus
-									disabled={{ before: new Date() }}
+									disabled={(date) => {
+										const occupiedDates =
+											room.room_occupied_dates!;
+
+										return (
+											date < new Date() ||
+											occupiedDates.includes(
+												date.toISOString().split("T")[0]
+											)
+										);
+									}}
 								/>
 							</PopoverContent>
 						</Popover>
