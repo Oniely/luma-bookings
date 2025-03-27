@@ -18,33 +18,15 @@ const Showcase = () => {
 					className="object-cover"
 				/>
 				<p className="max-w-md text-justify">
-					Britani tried to surreptitiously record a fight in
-					thesprinter van. Meredith became convinced that arecording
-					device was hidden in her room. Whitneyrevealed that she had
-					reached out to Monica to getdirt on Lisa.
+				Jane, a busy business traveler, opens the hotel app on her smartphone. She inputs New York City as her destination, selects check-in and check-out dates, and filters for hotels with high guest ratings and in the downtown area. Jane browses the search results, taps on a hotel to view detailed room information, and proceeds to book a deluxe room. The app guides her through the secure payment process, and she receives an instant confirmation with all the reservation details. Jane later accesses her account to review the itinerary and prepare for her upcoming trip.
 				</p>
 			</div>
 			<div className="flexBetween flex-col-reverse min-[900px]:flex-row gap-10 mt-30 md:px-[6vw]">
 				<div className="space-y-4">
 					<p className="max-w-md text-sm">
-						Heather graced us with another killer monologue,
-						thistime while the women enjoyed dinner at luxury
-						themepark BON, urging everyone to stop trying to
-						“catch”their castmates in a lie, and instead form a
-						protectivesisterhood circle that no gossip blogger
-						couldpenetrate by, um, encouraging each person to sharea
-						screenshot of the most hurtful thing they had eversaid
-						about someone else at the table. And that is howthe
-						season ended with security needing to separateLisa and
-						Angie after they started throwing flowers ateach other.
+					John, a leisure traveler, opens the hotel app to plan his vacation. He inputs his destination, travel dates, and guest count, then applies filters to narrow down his options. After reviewing several hotel profiles, John selects one that meets his needs, completes the booking process with a secure payment, and receives an instant confirmation. He later checks his account for detailed itinerary information and any special instructions from the hotel.
 					</p>
 					<div>
-						<button className="bg-black-100 text-white py-2 px-4 rounded-full flexCenter gap-2 cursor-pointer hover:bg-black">
-							<MoveUpRight className="size-4" />
-							<span className="text-sm uppercase font-medium">
-								Book Now
-							</span>
-						</button>
 					</div>
 				</div>
 				<Image
