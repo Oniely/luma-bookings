@@ -189,9 +189,16 @@ const ReviewItem = ({ review }: { review: any }) => {
 };
 
 const UserReviews = ({ reviews }: { reviews: Review[] }) => {
+	const avgReview = () => {
+		let sum = 0;
+		reviews.forEach((review) => {
+			sum += Number(review.review_rating);
+		});
+		return sum / reviews.length;
+	}
 	return (
 		<div style={styles.container}>
-			<RatingsSummary overallRating={4.5} />
+			<RatingsSummary overallRating={avgReview()} />
 			<div style={styles.reviewsList}>
 				{reviews.map((review, index) => (
 					<ReviewItem key={index} review={review} />
