@@ -34,7 +34,7 @@ export interface Transaction {
 	event_id?: string;
 	reservation_date_start: Date;
 	reservation_date_end: Date;
-	reservation_payment_amount: string;
+	reservation_payment_amount: any;
 	reservation_payment_type: string;
 	reservation_description?: string;
 	reservation_status: string;

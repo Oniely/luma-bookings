@@ -54,7 +54,7 @@ const BookingConfirmation = ({ user }: { user: any }) => {
 			event_id: undefined,
 			reservation_date_start: checkInDate,
 			reservation_date_end: checkOutDate,
-			reservation_total_payment_amount: totalPrice,
+			reservation_payment_amount: totalPrice,
 			reservation_payment_type: selectedPaymentMethod,
 			reservation_description: `Booking for ${
 				roomDetails.name
