@@ -20,6 +20,6 @@ export default function Page(){
     }
 
     return (
-        <><ManageBookings roomData={data} /></>
+        <ManageBookings roomData={data} />
     );
 }

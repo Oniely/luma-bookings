@@ -185,6 +185,7 @@ const styles = {
     container: {
         display: "flex",
         padding: "20px",
+        width: "100%"
     },
 
     sidebar: {
