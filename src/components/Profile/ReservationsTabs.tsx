@@ -17,25 +17,32 @@ const ReservationsTabs = ({
 					All
 				</TabsTrigger>
 				<TabsTrigger
-					value="to-confirm"
+					value="pending"
 					className="border border-gray-200 rounded-none px-4 py-2 data-[state=active]:bg-gray-100 data-[state=active]:shadow-none"
 				>
-					To Confirm
+					Pending
 				</TabsTrigger>
 				<TabsTrigger
-					value="booked"
+					value="active"
 					className="border border-gray-200 rounded-none px-4 py-2 data-[state=active]:bg-gray-100 data-[state=active]:shadow-none"
 				>
-					Booked
+					Active
 				</TabsTrigger>
 				<TabsTrigger
-					value="done"
+					value="cancelled"
 					className="border border-gray-200 rounded-none px-4 py-2 data-[state=active]:bg-gray-100 data-[state=active]:shadow-none"
 				>
-					Done
+					Cancelled
+				</TabsTrigger>
+				<TabsTrigger
+					value="completed"
+					className="border border-gray-200 rounded-none px-4 py-2 data-[state=active]:bg-gray-100 data-[state=active]:shadow-none"
+				>
+					Completed
 				</TabsTrigger>
 			</TabsList>
 
+			{/* All Reservations */}
 			<TabsContent value="all">
 				{reservations.map((reservation) => (
 					<ReservedBooking
@@ -50,9 +57,10 @@ const ReservationsTabs = ({
 				)}
 			</TabsContent>
 
-			<TabsContent value="to-confirm">
+			{/* Pending Reservations */}
+			<TabsContent value="pending">
 				{reservations
-					.filter((res) => res.reservation_status === "to-confirm")
+					.filter((res) => res.reservation_status === "pending")
 					.map((reservation) => (
 						<ReservedBooking
 							key={reservation.reservation_id}
@@ -60,7 +68,7 @@ const ReservationsTabs = ({
 						/>
 					))}
 				{reservations.filter(
-					(res) => res.reservation_status === "to-confirm"
+					(res) => res.reservation_status === "pending"
 				).length === 0 && (
 					<div className="py-8 text-center text-gray-500">
 						No reservations to confirm
@@ -68,9 +76,10 @@ const ReservationsTabs = ({
 				)}
 			</TabsContent>
 
-			<TabsContent value="booked">
+			{/* Active Reservations */}
+			<TabsContent value="active">
 				{reservations
-					.filter((res) => res.reservation_status === "booked")
+					.filter((res) => res.reservation_status === "active")
 					.map((reservation) => (
 						<ReservedBooking
 							key={reservation.reservation_id}
@@ -78,25 +87,46 @@ const ReservationsTabs = ({
 						/>
 					))}
 				{reservations.filter(
-					(res) => res.reservation_status === "booked"
+					(res) => res.reservation_status === "active"
 				).length === 0 && (
 					<div className="py-8 text-center text-gray-500">
-						No booked reservations
+						No active reservations
 					</div>
 				)}
 			</TabsContent>
 
-			<TabsContent value="done">
+			{/* Cancelled Reservations */}
+			<TabsContent value="cancelled">
 				{reservations
-					.filter((res) => res.reservation_status === "done")
+					.filter((res) => res.reservation_status === "cancelled")
 					.map((reservation) => (
 						<ReservedBooking
 							key={reservation.reservation_id}
 							reservation={reservation}
 						/>
 					))}
-				{reservations.filter((res) => res.reservation_status === "done")
-					.length === 0 && (
+				{reservations.filter(
+					(res) => res.reservation_status === "cancelled"
+				).length === 0 && (
+					<div className="py-8 text-center text-gray-500">
+						No cancelled reservations
+					</div>
+				)}
+			</TabsContent>
+
+			{/* Completed Reservations */}
+			<TabsContent value="completed">
+				{reservations
+					.filter((res) => res.reservation_status === "completed")
+					.map((reservation) => (
+						<ReservedBooking
+							key={reservation.reservation_id}
+							reservation={reservation}
+						/>
+					))}
+				{reservations.filter(
+					(res) => res.reservation_status === "completed"
+				).length === 0 && (
 					<div className="py-8 text-center text-gray-500">
 						No completed reservations
 					</div>

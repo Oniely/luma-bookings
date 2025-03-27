@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-const PaymentMethod = () => {
+interface Props {
+	setPaymentMethod: (id: string) => void;
+}
+
+const PaymentMethod = ({ setPaymentMethod }: Props) => {
 	const paymentMethods = [
 		{ id: "card", name: "Credit or debit card" },
 		{ id: "gcash", name: "GCash" },
@@ -12,6 +16,10 @@ const PaymentMethod = () => {
 
 	const [selected, setSelected] = useState(paymentMethods[0]);
 	const [open, setOpen] = useState(false);
+
+	useEffect(() => {
+		setPaymentMethod(selected.id);
+	}, [selected]);
 
 	return (
 		<div className="container py-2 bg-transparent text-black w-1/2 align-items-center justify-content-center">

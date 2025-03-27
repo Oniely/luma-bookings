@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PaymentMethod from "../PaymentMethod";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -8,8 +8,11 @@ import { useBookingStore } from "@/lib/store/bookingStore";
 import { formatDate } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { bookRoom } from "@/lib/action/userreservations";
+import { Transaction } from "@/lib/types";
+import { toast } from "sonner";
 
-const BookingConfirmation = () => {
+const BookingConfirmation = ({ user }: { user: any }) => {
 	const router = useRouter();
 	const { checkIn, checkOut, guests, roomDetails, resetBooking } =
 		useBookingStore();
@@ -27,7 +30,7 @@ const BookingConfirmation = () => {
 			: 0;
 
 	const totalPrice = roomDetails?.price
-		? roomDetails.price * nightsOfStay
+		? parseFloat((roomDetails.price * nightsOfStay).toFixed(2))
 		: 0;
 
 	useEffect(() => {
@@ -36,27 +39,43 @@ const BookingConfirmation = () => {
 		};
 	}, []);
 
-	const handleConfirmBooking = () => {
-		console.log({
-			checkIn: checkInDate?.toISOString(),
-			checkOut: checkOutDate?.toISOString(),
-			guests: {
-				adults: guests.adults,
-				children: guests.children,
-				total: guests.adults + guests.children,
-			},
-			room: {
-				id: roomDetails?.id,
-				name: roomDetails?.name,
-				pricePerNight: roomDetails?.price,
-				maxGuests: roomDetails?.maxGuests,
-			},
-			stay: {
-				nights: nightsOfStay,
-				totalPrice: totalPrice,
-			},
-		});
-		return;
+	const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("cash");
+
+	const handleConfirmBooking = async () => {
+		if (!checkInDate || !checkOutDate || !roomDetails) {
+			console.error("Missing required booking details.");
+			return;
+		}
+
+		const transactionPayload: Transaction = {
+			reservation_id: crypto.randomUUID(),
+			room_id: roomDetails.id,
+			package_id: undefined,
+			event_id: undefined,
+			reservation_date_start: checkInDate,
+			reservation_date_end: checkOutDate,
+			reservation_total_payment_amount: totalPrice,
+			reservation_payment_type: selectedPaymentMethod,
+			reservation_description: `Booking for ${
+				roomDetails.name
+			} from ${formatDate(checkInDate)} to ${formatDate(checkOutDate)}`,
+			reservation_status: "pending",
+		};
+
+		try {
+			const response = await bookRoom(
+				transactionPayload,
+				user.accessToken!
+			);
+			toast.success(
+				response.message &&
+					"Booking successful! Please wait for confirmation, Thank you!"
+			);
+
+			router.push("/");
+		} catch (error) {
+			console.error("Booking failed:", error);
+		}
 	};
 
 	return (
@@ -78,7 +97,9 @@ const BookingConfirmation = () => {
 					<div className="mt-6">
 						<p className="text-2xl mt-2 max-w-lg">Payment</p>
 					</div>
-					<PaymentMethod />
+					<PaymentMethod
+						setPaymentMethod={setSelectedPaymentMethod}
+					/>
 					<div className="flex flex-col">
 						<div className="mt-4">
 							<p className="text-2xl whitespace-nowrap">

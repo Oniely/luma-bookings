@@ -9,7 +9,7 @@ const BookingConfirmationPage = async () => {
 
 	return (
 		<div className="padding-container max-container">
-			<BookingConfirmation />
+			<BookingConfirmation user={session} />
 		</div>
 	);
 };

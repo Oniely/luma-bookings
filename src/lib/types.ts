@@ -28,7 +28,7 @@ export interface Room {
 
 export interface Transaction {
 	reservation_id: string;
-	user_id: string;
+	user_id?: string;
 	room_id: string;
 	package_id?: string;
 	event_id?: string;
@@ -36,7 +36,7 @@ export interface Transaction {
 	reservation_date_end: Date;
 	reservation_total_payment_amount: number;
 	reservation_payment_type: string;
-	reservation_description: string;
+	reservation_description?: string;
 	reservation_status: string;
 }
 

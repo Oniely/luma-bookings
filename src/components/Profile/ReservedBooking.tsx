@@ -36,11 +36,13 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 	}).format(Number(reservation.reservation_total_payment_amount));
 
 	const handleSubmitReview = () => {
-		console.log("Submitted Review:", {
+		const payload = {
 			reservationId: reservation.reservation_id,
 			rating,
 			reviewText,
-		});
+		};
+
+		console.log("Submitted Review: ", payload);
 		// TODO: Send this data to your backend API
 	};
 
@@ -55,21 +57,21 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 					<p className="text-sm text-gray-500">{dateRange}</p>
 					<span
 						className={`text-xs px-2 py-1 rounded-full ${
-							reservation.reservation_status === "to-confirm"
+							reservation.reservation_status === "pending"
 								? "bg-yellow-100 text-yellow-800"
-								: reservation.reservation_status === "booked"
+								: reservation.reservation_status === "active"
 								? "bg-green-100 text-green-800"
-								: reservation.reservation_status === "done"
+								: reservation.reservation_status === "completed"
 								? "bg-blue-100 text-blue-800"
 								: "bg-gray-100 text-gray-800"
 						}`}
 					>
-						{reservation.reservation_status === "to-confirm"
-							? "To Confirm"
-							: reservation.reservation_status === "booked"
-							? "Booked"
-							: reservation.reservation_status === "done"
-							? "Done"
+						{reservation.reservation_status === "pending"
+							? "Pending"
+							: reservation.reservation_status === "active"
+							? "Active"
+							: reservation.reservation_status === "completed"
+							? "Completed"
 							: "All"}
 					</span>
 				</div>
@@ -142,7 +144,7 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 					</AlertDialogContent>
 				</AlertDialog>
 
-				{reservation.reservation_status === "all" && (
+				{reservation.reservation_status === "completed" && (
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
 							<button className="text-blue-600">
