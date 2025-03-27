@@ -94,9 +94,13 @@ export async function register(data: {
 			return { error: signUpCognito.message.toString() };
 		}
 		
-		console.log(signUpCognito.message.UserSub)
+		if (typeof signUpCognito.message !== "string") {
+			console.log(signUpCognito.message.UserSub);
+		} else {
+			console.error("Unexpected error: signUpCognito.message is a string");
+		}
 		const res = await axiosClient.post("/create_user", {
-			user_id: signUpCognito.message.UserSub,
+			user_id: typeof signUpCognito.message !== "string" ? signUpCognito.message.UserSub : "",
 			fullName: data.fname + " " + data.lname,
 			username: data.username,
 			email: data.email,
