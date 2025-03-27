@@ -71,12 +71,12 @@ const BookingConfirmation = () => {
 						>
 							<ArrowLeft size={28} />
 						</button>
-						<text className="text-3xl mt-2 max-w-lg">
+						<p className="text-3xl mt-2 max-w-lg">
 							Confirm Booking
-						</text>
+						</p>
 					</div>
 					<div className="mt-6">
-						<text className="text-2xl mt-2 max-w-lg">Payment</text>
+						<p className="text-2xl mt-2 max-w-lg">Payment</p>
 					</div>
 					<PaymentMethod />
 					<div className="flex flex-col">

@@ -122,9 +122,9 @@ const UpdateProfileForm = ({ user, token }: Props) => {
 						className="border rounded-full size-20 border-black-100 object-cover"
 					/>
 					<div>
-						<p>{user.fullName}</p>
+						<p>{user.username}</p>
 						<p className="text-sm font-light leading-none">
-							@{user.fullName.split(" ")[0]}
+							@{user.username}
 						</p>
 						<label
 							htmlFor="profile_image"

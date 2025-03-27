@@ -3,7 +3,7 @@
 import { Room } from "@/lib/types";
 import { formatDate } from "@/lib/utils";
 import { ChevronsUpDown } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
@@ -14,6 +14,7 @@ import { toast } from "sonner";
 
 interface Props {
 	room: Room;
+	user: any;
 }
 
 interface RangeDate {
@@ -21,7 +22,7 @@ interface RangeDate {
 	to: Date;
 }
 
-const BookingWidget = ({ room }: Props) => {
+const BookingWidget = ({ room, user }: Props) => {
 	const router = useRouter();
 	const {
 		setDates,
@@ -64,6 +65,8 @@ const BookingWidget = ({ room }: Props) => {
 	};
 
 	const handleBooking = () => {
+		if (!user) redirect("/login");
+
 		if (!dateRange.from || !dateRange.to) {
 			toast.warning("Please select check-in and check-out dates");
 			return;

@@ -1,3 +1,4 @@
+import { auth } from "@/app/auth";
 import BookingWidget from "@/components/Room/BookingWidget";
 import RoomGallery from "@/components/Room/RoomGallery";
 import RoomInformation from "@/components/Room/RoomInformation";
@@ -11,6 +12,7 @@ interface PageProps {
 }
 
 const Page = async ({ params }: PageProps) => {
+	const session = await auth();
 	const id = (await params)?.id;
 
 	if (!id) notFound();
@@ -25,7 +27,7 @@ const Page = async ({ params }: PageProps) => {
 			<RoomGallery room={room} />
 			<div className="grid grid-cols-1 lg:grid-cols-3 mt-8 gap-6">
 				<RoomInformation room={room} />
-				<BookingWidget room={room} />
+				<BookingWidget room={room} user={session} />
 			</div>
 			<Separator className="my-5" />
 			<div>

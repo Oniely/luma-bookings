@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -13,8 +14,12 @@ import {
 } from "../ui/alert-dialog";
 import { format } from "date-fns";
 import { Transaction as Reservation } from "@/lib/types";
+import { Star } from "lucide-react";
 
 const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
+	const [rating, setRating] = useState(0);
+	const [reviewText, setReviewText] = useState("");
+
 	const formattedStartDate = format(
 		new Date(reservation.reservation_date_start),
 		"MMM dd, yyyy"
@@ -28,7 +33,16 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 	const formattedPayment = new Intl.NumberFormat("en-US", {
 		style: "currency",
 		currency: "USD",
-	}).format(reservation.reservation_total_payment_amount);
+	}).format(Number(reservation.reservation_total_payment_amount));
+
+	const handleSubmitReview = () => {
+		console.log("Submitted Review:", {
+			reservationId: reservation.reservation_id,
+			rating,
+			reviewText,
+		});
+		// TODO: Send this data to your backend API
+	};
 
 	return (
 		<div className="flex items-center justify-between border-b border-gray-200 py-4">
@@ -119,24 +133,6 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 											}
 										</span>
 									</div>
-									<div className="grid grid-cols-2 gap-1">
-										<span className="font-medium">
-											Description:
-										</span>
-										<span>
-											{
-												reservation.reservation_description
-											}
-										</span>
-									</div>
-									<div className="grid grid-cols-2 gap-1">
-										<span className="font-medium">
-											Reservation ID:
-										</span>
-										<span className="text-sm text-gray-500">
-											{reservation.room_id}
-										</span>
-									</div>
 								</div>
 							</AlertDialogDescription>
 						</AlertDialogHeader>
@@ -145,34 +141,59 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 						</AlertDialogFooter>
 					</AlertDialogContent>
 				</AlertDialog>
-				{reservation.reservation_status === "to-confirm" && (
+
+				{reservation.reservation_status === "all" && (
 					<AlertDialog>
 						<AlertDialogTrigger asChild>
-							<button className="text-red-600">Cancel</button>
+							<button className="text-blue-600">
+								Write Review
+							</button>
 						</AlertDialogTrigger>
 						<AlertDialogContent>
 							<AlertDialogHeader>
 								<AlertDialogTitle>
-									Cancel Reservation
+									Write a Review
 								</AlertDialogTitle>
 								<AlertDialogDescription>
-									Are you sure you want to cancel this
-									reservation? This action cannot be undone.
+									Rate your experience and leave a comment.
 								</AlertDialogDescription>
 							</AlertDialogHeader>
+
+							{/* Star Rating System */}
+							<div className="flex justify-center gap-1 my-2">
+								{[1, 2, 3, 4, 5].map((star) => (
+									<Star
+										key={star}
+										size={30}
+										className={`cursor-pointer ${
+											star <= rating
+												? "text-yellow-500"
+												: "text-gray-300"
+										}`}
+										onClick={() => setRating(star)}
+									/>
+								))}
+							</div>
+
+							{/* Review Input */}
+							<textarea
+								className="w-full border rounded-lg p-2"
+								rows={3}
+								placeholder="Write your review..."
+								value={reviewText}
+								onChange={(e) => setReviewText(e.target.value)}
+							/>
+
 							<AlertDialogFooter>
-								<AlertDialogCancel>
-									No, keep it
-								</AlertDialogCancel>
+								<AlertDialogCancel>Cancel</AlertDialogCancel>
 								<AlertDialogAction
-									className="bg-red-600 hover:bg-red-700"
-									onClick={() =>
-										console.log(
-											`Cancelled reservation ${reservation.reservation_id}`
-										)
+									className="bg-blue-600 hover:bg-blue-700"
+									onClick={handleSubmitReview}
+									disabled={
+										rating === 0 || reviewText.trim() === ""
 									}
 								>
-									Confirm Cancel
+									Submit Review
 								</AlertDialogAction>
 							</AlertDialogFooter>
 						</AlertDialogContent>

@@ -54,7 +54,11 @@ const Menu = async () => {
 					</>
 				)}
 				<DropdownMenuGroup>
-					<DropdownMenuItem>GitHub</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link href="https://github.com/Oniely/luma-bookings">
+							GitHub
+						</Link>
+					</DropdownMenuItem>
 					<DropdownMenuItem>Support</DropdownMenuItem>
 				</DropdownMenuGroup>
 				{session?.user && (
