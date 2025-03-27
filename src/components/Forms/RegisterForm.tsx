@@ -48,12 +48,13 @@ const RegisterForm = () => {
 		}
 
 		const res = await register(result.data);
+		console.log(res)
 
 		if (res?.error) {
 			setErrors({ email: res.error });
 			return;
 		} else {
-			router.push("/login");
+			router.push("/verify?username=" + formValuesData.username);
 		}
 	}
 

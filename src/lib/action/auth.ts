@@ -93,13 +93,40 @@ export async function register(data: {
 		if (!signUpCognito.success) {
 			return { error: signUpCognito.message.toString() };
 		}
-
+		
+		if (typeof signUpCognito.message !== "string") {
+			console.log(signUpCognito.message.UserSub);
+		} else {
+			console.error("Unexpected error: signUpCognito.message is a string");
+		}
 		const res = await axiosClient.post("/create_user", {
+			user_id: typeof signUpCognito.message !== "string" ? signUpCognito.message.UserSub : "",
 			fullName: data.fname + " " + data.lname,
 			username: data.username,
 			email: data.email,
 			password: data.confirmPassword,
 			profile_url: data?.profile_url || "/images/default_profile.jpg",
+		}).then(response => {
+			return response.data;
+		  }).catch(error => {
+			console.error("Error:", error);
+		  });;
+
+		return res.data;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+}
+
+export async function verify(data: {
+	username: string;
+	confirmation_code: string;
+}) {
+	try {
+		const res = await axiosClient.post("/verify_user", {
+			username: data.username,
+			confirmation_code: data.confirmation_code,
 		});
 
 		return res.data;
@@ -107,6 +134,8 @@ export async function register(data: {
 		console.error(error);
 		throw error;
 	}
+} {
+	
 }
 
 export async function updateProfile(
