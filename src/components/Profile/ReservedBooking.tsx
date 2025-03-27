@@ -31,9 +31,9 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 	const dateRange = `${formattedStartDate} - ${formattedEndDate}`;
 
 	const formattedPayment = new Intl.NumberFormat("en-US", {
-		style: "currency",
-		currency: "USD",
-	}).format(Number(reservation.reservation_total_payment_amount));
+			style: "currency",
+			currency: "USD",
+		}).format(Number(reservation.reservation_payment_amount));
 
 	const handleSubmitReview = () => {
 		const payload = {
@@ -123,7 +123,7 @@ const ReservedBooking = ({ reservation }: { reservation: Reservation }) => {
 										<span className="font-medium">
 											Payment Amount:
 										</span>
-										<span>{formattedPayment}</span>
+										<span>${reservation.reservation_payment_amount}</span>
 									</div>
 									<div className="grid grid-cols-2 gap-1">
 										<span className="font-medium">
