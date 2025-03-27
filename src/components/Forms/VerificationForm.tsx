@@ -4,6 +4,8 @@ import { useActionState, useState } from "react";
 import Loading from "../Loading";
 import { Button } from "../ui/button";
 import { SquareAsterisk } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { verify } from "@/lib/action/auth";
 
 const VerificationForm = () => {
 	const [formValues, setFormValues] = useState({
@@ -11,6 +13,7 @@ const VerificationForm = () => {
 	});
 	const [errors, setErrors] = useState<any>({});
 	const router = useRouter();
+	const searchParams = useSearchParams();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setErrors({ ...errors, [e.target.name]: "" });
@@ -18,11 +21,26 @@ const VerificationForm = () => {
 	};
 
 	async function handleSubmit(prevState: any, formData: FormData) {
+		const username = searchParams.get("username");
+		if (!username) {
+			alert("Username is missing in the URL.");
+			return;
+		}
 		const formValuesData = {
-			code: Number(formData.get("code") as string)
+			username,
+			confirmation_code: formData.get("code") as string
 		};
+		
 
+		const res = await verify(formValuesData);
+		console.log(res)
+		if (res?.error) {
+			setErrors({ email: res.error });
+			return;
+		} else {
 			router.push("/login");
+		}
+		
 	}
 
 	const [state, formAction, isPending] = useActionState(handleSubmit, null);
@@ -32,11 +50,8 @@ const VerificationForm = () => {
 			<div className="flex justify-between">
 				<div>
 					<h2 className="text-2xl font-semibold font-canela">
-						Sign up
+						Enter your Verification code below {searchParams.get("username")}
 					</h2>
-					<p className="text-sm">
-						Please enter your details to sign up.
-					</p>
 				</div>
 				<div>
 					<SquareAsterisk size={24} />
@@ -49,7 +64,7 @@ const VerificationForm = () => {
                     </div>
                     <input
                         type="text"
-                        name="fname"
+                        name="code"
                         value={formValues.code}
                         onChange={handleChange}
                         className="w-full px-2 py-3 border"
