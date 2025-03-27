@@ -53,7 +53,6 @@ import AdminRoomCard from "./AdminRoom/AdminRoomCard";
 const ManageHotels = ({ roomData }: { roomData: Room[] }) => {
 	const [search, setSearch] = useState("");
 	const [data, setData] = useState(roomData);
-	const [menuOpen, setMenuOpen] = useState<string | null>(null);
 	const [nameFilter, setNameFilter] = useState("");
 	const [dateAddedFilter, setDateAddedFilter] = useState("");
 	const [priceFilter, setPriceFilter] = useState("");
@@ -102,14 +101,7 @@ const ManageHotels = ({ roomData }: { roomData: Room[] }) => {
 	// };
 
 	return (
-		<div style={styles.container}>
-			<div style={styles.sidebar}>
-				<ul style={styles.menu}>
-					<li style={styles.menuItem}>Dashboard</li>
-					<li style={styles.menuItem}>Bookings</li>
-					<li style={styles.menuItem}>Reviews</li>
-				</ul>
-			</div>
+		<>
 			<div style={styles.content}>
 				<div style={styles.searchBar}>
 					<input
@@ -180,7 +172,7 @@ const ManageHotels = ({ roomData }: { roomData: Room[] }) => {
 					))}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

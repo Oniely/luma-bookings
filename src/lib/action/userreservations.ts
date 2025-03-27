@@ -21,6 +21,18 @@ export async function getUserReservations() {
 	return { data: data.data.data, error };
 }
 
+export async function getReservations() {
+	const { data, error } = await tryCatch(
+		axiosClient.get("/transactions", {
+		})
+	);
+
+	// console.log((await auth())!.accessToken);
+	if (error) return { error: `${error}` };
+
+	return { data: data.data.data, error };
+}
+
 export async function getRoom(id: string) {
 	const { data, error } = await tryCatch(
 		axiosClient.get(`/transaction/${id}`)
@@ -44,7 +56,7 @@ export async function bookRoom(transaction: Transaction, token: string) {
 					transaction.reservation_date_end
 				),
 				reservation_payment_amount: Number(
-					transaction.reservation_total_payment_amount
+					transaction.reservation_payment_amount
 				),
 				reservation_payment_type: transaction.reservation_payment_type,
 				reservation_description:
